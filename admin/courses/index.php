@@ -8,6 +8,35 @@ require_once '../includes/header.php';
 require_once '../includes/sidebar.php';
 require_once '../includes/topbar.php';
 
+if(isset($_SESSION['success'])){
+
+    echo '<div class="alert alert-success alert-dismissible fade show">
+
+    '.$_SESSION['success'].'
+
+    <button class="btn-close" data-bs-dismiss="alert"></button>
+
+    </div>';
+
+    unset($_SESSION['success']);
+
+}
+
+if(isset($_SESSION['error'])){
+
+    echo '<div class="alert alert-danger alert-dismissible fade show">
+
+    '.$_SESSION['error'].'
+
+    <button class="btn-close" data-bs-dismiss="alert"></button>
+
+    </div>';
+
+    unset($_SESSION['error']);
+
+}
+
+
 $stmt = $pdo->query("SELECT * FROM courses ORDER BY id DESC");
 
 $courses = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -137,13 +166,26 @@ class="rounded">
 
 <td>
 
-<a href="#" class="btn btn-warning btn-sm">
+<a href="../modules/index.php?course_id=<?= $course['id']; ?>"
+class="btn btn-info btn-sm"
+title="Manage Modules">
+
+<i class="fas fa-layer-group"></i>
+
+</a>
+
+<a href="edit.php?id=<?= $course['id']; ?>"
+class="btn btn-warning btn-sm"
+title="Edit Course">
 
 <i class="fas fa-edit"></i>
 
 </a>
 
-<a href="#" class="btn btn-danger btn-sm">
+<a href="delete.php?id=<?= $course['id']; ?>"
+class="btn btn-danger btn-sm"
+onclick="return confirm('Are you sure you want to delete this course?');"
+title="Delete Course">
 
 <i class="fas fa-trash"></i>
 

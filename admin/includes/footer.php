@@ -32,10 +32,12 @@
 
 $(document).ready(function(){
 
-$('#studentsTable').DataTable({
+$('#studentsTable, #modulesTable').DataTable({
 
 responsive:true,
-
+language: {
+    emptyTable: "No modules have been created for this course yet."
+},
 pageLength:10,
 
 lengthMenu:[
