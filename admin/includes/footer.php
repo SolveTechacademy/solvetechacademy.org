@@ -25,7 +25,7 @@
 <script src="https://cdn.datatables.net/buttons/2.4.2/js/buttons.print.min.js"></script>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-<script src="assets/js/admin.js"></script>
+<script src="<?= ADMIN_ASSETS; ?>/js/admin.js"></script>
 
 </body>
 <script>
