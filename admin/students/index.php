@@ -226,28 +226,31 @@ if($payment=="Paid"){
 
 <div class="btn-group">
 
-<a
-href="view.php?id=<?= $student['id']; ?>"
-class="btn btn-primary btn-sm">
+<a href="view.php?id=<?= $student['id']; ?>" class="btn btn-primary btn-sm">
+    <i class="fas fa-eye"></i>
+</a>
 
-<i class="fas fa-eye"></i>
+<?php if($student['status'] == "Pending"){ ?>
+
+<a href="approve.php?id=<?= $student['id']; ?>"
+   class="btn btn-success btn-sm"
+   onclick="return confirm('Approve this student?');">
+
+    <i class="fas fa-check"></i>
 
 </a>
 
-<a
-href="edit.php?id=<?= $student['id']; ?>"
-class="btn btn-warning btn-sm">
+<?php } ?>
 
-<i class="fas fa-edit"></i>
-
+<a href="edit.php?id=<?= $student['id']; ?>" class="btn btn-warning btn-sm">
+    <i class="fas fa-edit"></i>
 </a>
 
-<a
-href="delete.php?id=<?= $student['id']; ?>"
-class="btn btn-danger btn-sm"
-onclick="return confirm('Delete this student?');">
+<a href="delete.php?id=<?= $student['id']; ?>"
+   class="btn btn-danger btn-sm"
+   onclick="return confirm('Delete this student?');">
 
-<i class="fas fa-trash"></i>
+    <i class="fas fa-trash"></i>
 
 </a>
 

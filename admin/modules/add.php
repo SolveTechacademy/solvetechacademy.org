@@ -23,6 +23,16 @@ $stmt = $pdo->prepare("SELECT * FROM courses WHERE id = ?");
 $stmt->execute([$course_id]);
 
 $course = $stmt->fetch(PDO::FETCH_ASSOC);
+// Get next module order
+$orderStmt = $pdo->prepare("
+    SELECT COALESCE(MAX(module_order),0)+1 AS next_order
+    FROM course_modules
+    WHERE course_id=?
+");
+
+$orderStmt->execute([$course_id]);
+
+$nextOrder = $orderStmt->fetch(PDO::FETCH_ASSOC)['next_order'];
 
 if (!$course) {
 
@@ -85,7 +95,7 @@ if (!$course) {
                         type="number"
                         name="module_order"
                         class="form-control"
-                        value="1">
+                        value="<?= $nextOrder; ?>"
 
                 </div>
 

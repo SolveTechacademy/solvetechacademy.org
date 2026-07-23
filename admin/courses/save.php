@@ -16,6 +16,14 @@ $price        = trim($_POST['price']);
 $instructor   = trim($_POST['instructor']);
 $mode         = trim($_POST['mode']);
 $status       = trim($_POST['status']);
+$short_description    = trim($_POST['short_description']);
+$full_description     = trim($_POST['full_description']);
+$learning_outcomes    = trim($_POST['learning_outcomes']);
+$career_opportunities = trim($_POST['career_opportunities']);
+$prerequisites        = trim($_POST['prerequisites']);
+$target_audience      = trim($_POST['target_audience']);
+$certificate_info     = trim($_POST['certificate_info']);
+$demo_video           = trim($_POST['demo_video']);
 if (
     empty($course_title) ||
     empty($category) ||
@@ -62,6 +70,14 @@ course_code,
 course_title,
 category,
 description,
+short_description,
+full_description,
+learning_outcomes,
+career_opportunities,
+prerequisites,
+target_audience,
+certificate_info,
+demo_video,
 duration,
 level,
 price,
@@ -74,7 +90,7 @@ status
 
 VALUES(
 
-?,?,?,?,?,?,?,?,?,?,?
+?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?
 
 )";
 
@@ -86,6 +102,14 @@ $course_code,
 $course_title,
 $category,
 $description,
+$short_description,
+$full_description,
+$learning_outcomes,
+$career_opportunities,
+$prerequisites,
+$target_audience,
+$certificate_info,
+$demo_video,
 $duration,
 $level,
 $price,

@@ -8,6 +8,35 @@ require_once '../includes/header.php';
 require_once '../includes/sidebar.php';
 require_once '../includes/topbar.php';
 
+if(isset($_SESSION['success'])){
+
+    echo '<div class="alert alert-success alert-dismissible fade show">
+
+    '.$_SESSION['success'].'
+
+    <button class="btn-close" data-bs-dismiss="alert"></button>
+
+    </div>';
+
+    unset($_SESSION['success']);
+
+}
+
+if(isset($_SESSION['error'])){
+
+    echo '<div class="alert alert-danger alert-dismissible fade show">
+
+    '.$_SESSION['error'].'
+
+    <button class="btn-close" data-bs-dismiss="alert"></button>
+
+    </div>';
+
+    unset($_SESSION['error']);
+
+}
+
+
 if (!isset($_GET['course_id'])) {
     header("Location: ../courses/index.php");
     exit();
@@ -91,15 +120,32 @@ $modules = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
             <td>
 
-                <span class="badge bg-success">
+<?php if($module['status'] == 'Active'): ?>
 
-                    <?= htmlspecialchars($module['status']); ?>
+    <span class="badge bg-success">
 
-                </span>
+        Active
+
+    </span>
+
+<?php else: ?>
+
+    <span class="badge bg-danger">
+
+        Inactive
+
+    </span>
+
+<?php endif; ?>
+
+</td>
 
             </td>
 
             <td>
+                <a href="../lessons/index.php?module_id=<?= $module['id']; ?>" class="btn btn-info btn-sm">
+                    <i class="fas fa-book"></i> Lessons
+             </a>
 
                 <a href="edit.php?id=<?= $module['id']; ?>" class="btn btn-warning btn-sm">
 
@@ -119,8 +165,24 @@ $modules = $stmt->fetchAll(PDO::FETCH_ASSOC);
         </tr>
 
         <?php endforeach; ?>
+        <?php else: ?>
 
-    <?php endif; ?>
+<tr>
+
+    <td colspan="5" class="text-center py-4">
+
+        <i class="fas fa-folder-open fa-2x text-muted mb-3"></i>
+
+        <br><br>
+
+        No modules have been added to this course.
+
+    </td>
+
+</tr>
+
+<?php endif; ?>
+
 
     </tbody>
 

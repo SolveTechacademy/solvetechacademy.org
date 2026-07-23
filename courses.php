@@ -1,3 +1,13 @@
+<?php
+
+require_once 'config/database.php';
+
+$stmt = $pdo->prepare("SELECT * FROM courses WHERE status='Active' ORDER BY id DESC");
+$stmt->execute();
+
+$courses = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -9,8 +19,7 @@
     <meta content="" name="description">
 
     <!-- Favicon -->
-    <link href="img/stasmss.ico" rel="icon">
-
+    <link href="img/stasmss.ico" rel="icon"
     <!-- Google Web Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -193,390 +202,107 @@
 
 
     <!-- Courses Start -->
-    <div class="container-xxl py-5">
-        <div class="container">
-            <div class="text-center wow fadeInUp" data-wow-delay="0.1s">
-                <h6 class="section-title bg-white text-center px-3">Popular Courses</h6>
-                <h1 class="mb-5" style="color: #fb873f;">Explore new and trending free online courses</h1>
-            </div>
-            <div class="row g-4 py-2">
-                <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
-                    <div class="course-item shadow">
-                        <div class="position-relative overflow-hidden text-light image">
-                            <img class="img-fluid" src="img/course-1.jpg" alt="">
-                            <div style="position:absolute;top: 15px;left: 16px; font-size:12px; border-radius:3px; background-color:#fb873f;"
-                                class="px-2 py-1 fw-bold text-uppercase">FREE</div>
 
-                        </div>
-                        <div class="p-2 pb-0">
+<div class="container-xxl py-5">
 
-                            <h5 class="mb-1"><a href="single.html" class="text-dark">HTML Course for Beginners</a> </h5>
-                        </div>
-                        <div class="d-flex">
-                            <small class="flex-fill text-center py-1 px-2"><i class="fa fa-star text-warning me-2"></i>
-                                4.55</small>
-                            <small class="flex-fill text-center py-1 px-2"><i class="fa fa-user-graduate me-2"></i>5.8L+
-                                Learners
-                            </small>
-                            <small class="flex-fill text-center py-1 px-2"><i
-                                    class="fa fa-user me-2"></i>Beginner</small>
-                        </div>
-                        <div class="d-flex">
-                            <small class="flex-fill text-left p-2 px-2"><i class="fa fa-clock me-2"></i>2.0
-                                Hrs</small>
-                            <small class="py-1 px-2 fw-bold fs-6 text-center">₹ 0</small>
-                            <small class=" text-primary py-1 px-2 fw-bold fs-6" style="float:right;"><a href="#">Enroll
-                                    Now </a><i class="fa fa-chevron-right me-2 fs-10"></i></small>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
-                    <div class="course-item shadow">
-                        <div class="position-relative overflow-hidden text-light image">
-                            <img class="img-fluid" src="img/course-2.jpg" alt="">
-                            <div style="position:absolute;top: 15px;left: 16px; font-size:12px; border-radius:3px; background-color:#0ed44c;"
-                                class="px-2 py-1 fw-bold text-uppercase">PAID</div>
+<div class="container">
 
-                        </div>
-                        <div class="p-2 pb-0">
+<div class="text-center mb-5">
 
-                            <h5 class="mb-1">Front End Development-CSS
-                            </h5>
-                        </div>
-                        <div class="d-flex">
-                            <small class="flex-fill text-center py-1 px-2"><i class="fa fa-star text-warning me-2"></i>
-                                4.55</small>
-                            <small class="flex-fill text-center py-1 px-2"><i class="fa fa-user-graduate me-2"></i>5.2L+
-                                Learners
-                            </small>
-                            <small class="flex-fill text-center py-1 px-2"><i
-                                    class="fa fa-user me-2"></i>Beginner</small>
-                        </div>
-                        <div class="d-flex">
-                            <small class="flex-fill text-left p-2 px-2"><i class="fa fa-clock me-2"></i>4.0
-                                Hrs</small>
-                            <small class="py-1 px-2 fw-bold fs-6 text-center">₹ 199</small>
-                            <small class=" text-primary py-1 px-2 fw-bold fs-6" style="float:right;"><a href="#">Enroll
-                                    Now </a><i class="fa fa-chevron-right me-2 fs-10"></i></small>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
-                    <div class="course-item shadow">
-                        <div class="position-relative overflow-hidden text-light image">
-                            <img class="img-fluid" src="img/course-3.jpg" alt="">
-                            <div style="position:absolute;top: 15px;left: 16px; font-size:12px; border-radius:3px; background-color:#fb873f;"
-                                class="px-2 py-1 fw-bold text-uppercase">FREE</div>
+<h6 class="section-title bg-white text-center px-3">
 
-                        </div>
-                        <div class="p-2 pb-0">
+Popular Courses
 
-                            <h5 class="mb-1">Introduction to JavaScript
-                            </h5>
-                        </div>
-                        <div class="d-flex">
-                            <small class="flex-fill text-center py-1 px-2"><i class="fa fa-star text-warning me-2"></i>
-                                4.46</small>
-                            <small class="flex-fill text-center py-1 px-2"><i class="fa fa-user-graduate me-2"></i>76L+
-                                Learners
-                            </small>
-                            <small class="flex-fill text-center py-1 px-2"><i
-                                    class="fa fa-user me-2"></i>Beginner</small>
-                        </div>
-                        <div class="d-flex">
-                            <small class="flex-fill text-left p-2 px-2"><i class="fa fa-clock me-2"></i>2.5
-                                Hrs</small>
-                            <small class="py-1 px-2 fw-bold fs-6 text-center">₹ 0</small>
-                            <small class=" text-primary py-1 px-2 fw-bold fs-6" style="float:right;"><a href="#">Enroll
-                                    Now </a><i class="fa fa-chevron-right me-2 fs-10"></i></small>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
-                    <div class="course-item shadow">
-                        <div class="position-relative overflow-hidden text-light image">
-                            <img class="img-fluid" src="img/course-4.jpg" alt="">
-                            <div style="position:absolute;top: 15px;left: 16px; font-size:12px; border-radius:3px; background-color:#0ed44c;"
-                                class="px-2 py-1 fw-bold text-uppercase">PAID</div>
+</h6>
 
-                        </div>
-                        <div class="p-2 pb-0">
+<h1 style="color:#fb873f;">
 
-                            <h5 class="mb-1">Python Programming
-                            </h5>
-                        </div>
-                        <div class="d-flex">
-                            <small class="flex-fill text-center py-1 px-2"><i class="fa fa-star text-warning me-2"></i>
-                                3.54</small>
-                            <small class="flex-fill text-center py-1 px-2"><i class="fa fa-user-graduate me-2"></i>3.3L+
-                                Learners
-                            </small>
-                            <small class="flex-fill text-center py-1 px-2"><i
-                                    class="fa fa-user me-2"></i>Beginner</small>
-                        </div>
-                        <div class="d-flex">
-                            <small class="flex-fill text-left p-2 px-2"><i class="fa fa-clock me-2"></i>3.0
-                                Hrs</small>
-                            <small class="py-1 px-2 fw-bold fs-6 text-center">₹ 299</small>
-                            <small class=" text-primary py-1 px-2 fw-bold fs-6" style="float:right;"><a href="#">Enroll
-                                    Now </a><i class="fa fa-chevron-right me-2 fs-10"></i></small>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
-                    <div class="course-item shadow">
-                        <div class="position-relative overflow-hidden text-light image">
-                            <img class="img-fluid" src="img/course-5.jpg" alt="">
-                            <div style="position:absolute;top: 15px;left: 16px; font-size:12px; border-radius:3px; background-color:#fb873f;"
-                                class="px-2 py-1 fw-bold text-uppercase">FREE</div>
+Available Courses
 
-                        </div>
-                        <div class="p-2 pb-0">
+</h1>
 
-                            <h5 class="mb-1">SQL for Data Science
-                            </h5>
-                        </div>
-                        <div class="d-flex">
-                            <small class="flex-fill text-center py-1 px-1"><i class="fa fa-star text-warning me-2"></i>
-                                4.54</small>
-                            <small class="flex-fill text-center py-1 px-1"><i class="fa fa-user-graduate me-2"></i>1.3L+
-                                Learners
-                            </small>
-                            <small class="flex-fill text-center py-1 px-1"><i
-                                    class="fa fa-user me-2"></i>Intermediate</small>
-                        </div>
-                        <div class="d-flex">
-                            <small class="flex-fill text-left p-2 px-2"><i class="fa fa-clock me-2"></i>5.0
-                                Hrs</small>
-                            <small class="py-1 px-2 fw-bold fs-6 text-center">₹ 0</small>
-                            <small class=" text-primary py-1 px-2 fw-bold fs-6" style="float:right;"><a href="#">Enroll
-                                    Now </a><i class="fa fa-chevron-right me-2 fs-10"></i></small>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
-                    <div class="course-item shadow">
-                        <div class="position-relative overflow-hidden text-light image">
-                            <img class="img-fluid" src="img/course-6.jpg" alt="">
-                            <div style="position:absolute;top: 15px;left: 16px; font-size:12px; border-radius:3px; background-color:#fb873f;"
-                                class="px-2 py-1 fw-bold text-uppercase">FREE</div>
+</div>
 
-                        </div>
-                        <div class="p-2 pb-0">
+<div class="row g-4">
 
-                            <h5 class="mb-1">ChatGPT for Beginners
-                            </h5>
-                        </div>
-                        <div class="d-flex">
-                            <small class="flex-fill text-center py-1 px-2"><i class="fa fa-star text-warning me-2"></i>
-                                3.55</small>
-                            <small class="flex-fill text-center py-1 px-2"><i class="fa fa-user-graduate me-2"></i>3.5L+
-                                Learners
-                            </small>
-                            <small class="flex-fill text-center py-1 px-2"><i
-                                    class="fa fa-user me-2"></i>Beginner</small>
-                        </div>
-                        <div class="d-flex">
-                            <small class="flex-fill text-left p-2 px-2"><i class="fa fa-clock me-2"></i>4.5
-                                Hrs</small>
-                            <small class="py-1 px-2 fw-bold fs-6 text-center">₹ 0</small>
-                            <small class=" text-primary py-1 px-2 fw-bold fs-6" style="float:right;"><a href="#">Enroll
-                                    Now </a><i class="fa fa-chevron-right me-2 fs-10"></i></small>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
-                    <div class="course-item shadow">
-                        <div class="position-relative overflow-hidden text-light image">
-                            <img class="img-fluid" src="img/course-7.jpg" alt="">
-                            <div style="position:absolute;top: 15px;left: 16px; font-size:12px; border-radius:3px; background-color:#fb873f;"
-                                class="px-2 py-1 fw-bold text-uppercase">FREE</div>
+<?php foreach($courses as $course): ?>
 
-                        </div>
-                        <div class="p-2 pb-0">
+<div class="col-lg-4 col-md-6">
 
-                            <h5 class="mb-1">AWS for Beginners
-                            </h5>
-                        </div>
-                        <div class="d-flex">
-                            <small class="flex-fill text-center py-1 px-2"><i class="fa fa-star text-warning me-2"></i>
-                                4.53</small>
-                            <small class="flex-fill text-center py-1 px-2"><i class="fa fa-user-graduate me-2"></i>1L+
-                                Learners
-                            </small>
-                            <small class="flex-fill text-center py-1 px-2"><i
-                                    class="fa fa-user me-2"></i>Beginner</small>
-                        </div>
-                        <div class="d-flex">
-                            <small class="flex-fill text-left p-2 px-2"><i class="fa fa-clock me-2"></i>3.0
-                                Hrs</small>
-                            <small class="py-1 px-2 fw-bold fs-6 text-center">₹ 0</small>
-                            <small class=" text-primary py-1 px-2 fw-bold fs-6" style="float:right;"><a href="#">Enroll
-                                    Now </a><i class="fa fa-chevron-right me-2 fs-10"></i></small>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
-                    <div class="course-item shadow">
-                        <div class="position-relative overflow-hidden text-light image">
-                            <img class="img-fluid" src="img/course-8.jpg" alt="">
-                            <div style="position:absolute;top: 15px;left: 16px; font-size:12px; border-radius:3px; background-color:#0ed44c;"
-                                class="px-2 py-1 fw-bold text-uppercase">PAID</div>
+<div class="course-item shadow rounded overflow-hidden">
 
-                        </div>
-                        <div class="p-2 pb-0">
+<img
+src="<?= !empty($course['thumbnail']) ? $course['thumbnail'] : 'img/course-default.jpg'; ?>"
+class="img-fluid"
+style="height:220px;width:100%;object-fit:cover;">
 
-                            <h5 class="mb-1">Microsoft Azure Essentials
-                            </h5>
-                        </div>
-                        <div class="d-flex">
-                            <small class="flex-fill text-center py-1 px-1"><i class="fa fa-star text-warning me-2"></i>
-                                4.64</small>
-                            <small class="flex-fill text-center py-1 px-1"><i class="fa fa-user-graduate me-2"></i>4.4L+
-                                Learners
-                            </small>
-                            <small class="flex-fill text-center py-1 px-1"><i
-                                    class="fa fa-user me-2"></i>Intermediate</small>
-                        </div>
-                        <div class="d-flex">
-                            <small class="flex-fill text-left p-2 px-2"><i class="fa fa-clock me-2"></i>3.5
-                                Hrs</small>
-                            <small class="py-1 px-2 fw-bold fs-6 text-center">₹ 149</small>
-                            <small class=" text-primary py-1 px-2 fw-bold fs-6" style="float:right;"><a href="#">Enroll
-                                    Now </a><i class="fa fa-chevron-right me-2 fs-10"></i></small>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
-                    <div class="course-item shadow">
-                        <div class="position-relative overflow-hidden text-light image">
-                            <img class="img-fluid" src="img/course-9.jpg" alt="">
-                            <div style="position:absolute;top: 15px;left: 16px; font-size:12px; border-radius:3px; background-color:#fb873f;"
-                                class="px-2 py-1 fw-bold text-uppercase">FREE</div>
+<div class="p-4">
 
-                        </div>
-                        <div class="p-2 pb-0">
+<h5>
 
-                            <h5 class="mb-1">Introduction to MS Excel</h5>
-                        </div>
-                        <div class="d-flex">
-                            <small class="flex-fill text-center py-1 px-2"><i class="fa fa-star text-warning me-2"></i>
-                                4.6</small>
-                            <small class="flex-fill text-center py-1 px-2"><i class="fa fa-user-graduate me-2"></i>4.2L+
-                                Learners
-                            </small>
-                            <small class="flex-fill text-center py-1 px-2"><i
-                                    class="fa fa-user me-2"></i>Beginner</small>
-                        </div>
-                        <div class="d-flex">
-                            <small class="flex-fill text-left p-2 px-2"><i class="fa fa-clock me-2"></i>3.5
-                                Hrs</small>
-                            <small class="py-1 px-2 fw-bold fs-6 text-center">₹ 0</small>
-                            <small class=" text-primary py-1 px-2 fw-bold fs-6" style="float:right;"><a href="#">Enroll
-                                    Now </a><i class="fa fa-chevron-right me-2 fs-10"></i></small>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
-                    <div class="course-item shadow">
-                        <div class="position-relative overflow-hidden text-light image">
-                            <img class="img-fluid" src="img/course-10.jpg" alt="">
-                            <div style="position:absolute;top: 15px;left: 16px; font-size:12px; border-radius:3px; background-color:#0ed44c;"
-                                class="px-2 py-1 fw-bold text-uppercase">PAID</div>
+<?= htmlspecialchars($course['course_title']); ?>
 
-                        </div>
-                        <div class="p-2 pb-0">
+</h5>
 
-                            <h5 class="mb-1">Statistics For Data Science
-                               
-                                
-                            </h5>
-                        </div>
-                        <div class="d-flex">
-                            <small class="flex-fill text-center py-1 px-1"><i class="fa fa-star text-warning me-2"></i>
-                                4.55</small>
-                            <small class="flex-fill text-center py-1 px-1"><i class="fa fa-user-graduate me-2"></i>5.3L+
-                                Learners
-                            </small>
-                            <small class="flex-fill text-center py-1 px-1"><i
-                                    class="fa fa-user me-2"></i>Intermediate</small>
-                        </div>
-                        <div class="d-flex">
-                            <small class="flex-fill text-left p-2 px-2"><i class="fa fa-clock me-2"></i>2.5
-                                Hrs</small>
-                            <small class="py-1 px-2 fw-bold fs-6 text-center">₹ 299</small>
-                            <small class=" text-primary py-1 px-2 fw-bold fs-6" style="float:right;"><a href="#">Enroll
-                                    Now </a><i class="fa fa-chevron-right me-2 fs-10"></i></small>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
-                    <div class="course-item shadow">
-                        <div class="position-relative overflow-hidden text-light image">
-                            <img class="img-fluid" src="img/course-11.jpg" alt="">
-                            <div style="position:absolute;top: 15px;left: 16px; font-size:12px; border-radius:3px; background-color:#fb873f;"
-                                class="px-2 py-1 fw-bold text-uppercase">FREE</div>
+<p>
 
-                        </div>
-                        <div class="p-2 pb-0">
+<?= substr(strip_tags($course['description']),0,100); ?>...
 
-                            <h5 class="mb-1">Java Programming
-                            </h5>
-                        </div>
-                        <div class="d-flex">
-                            <small class="flex-fill text-center py-1 px-2"><i class="fa fa-star text-warning me-2"></i>
-                                4.45</small>
-                            <small class="flex-fill text-center py-1 px-2"><i class="fa fa-user-graduate me-2"></i>5L+
-                                Learners
-                            </small>
-                            <small class="flex-fill text-center py-1 px-2"><i
-                                    class="fa fa-user me-2"></i>Beginner</small>
-                        </div>
-                        <div class="d-flex">
-                            <small class="flex-fill text-left p-2 px-2"><i class="fa fa-clock me-2"></i>2.0
-                                Hrs</small>
-                            <small class="py-1 px-2 fw-bold fs-6 text-center">₹ 0</small>
-                            <small class=" text-primary py-1 px-2 fw-bold fs-6" style="float:right;"><a href="#">Enroll
-                                    Now </a><i class="fa fa-chevron-right me-2 fs-10"></i></small>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
-                    <div class="course-item shadow">
-                        <div class="position-relative overflow-hidden text-light image">
-                            <img class="img-fluid" src="img/course-12.png" alt="">
-                            <div style="position:absolute;top: 15px;left: 16px; font-size:12px; border-radius:3px; background-color:#fb873f;"
-                                class="px-2 py-1 fw-bold text-uppercase">FREE</div>
+</p>
 
-                        </div>
-                        <div class="p-2 pb-0">
+<p>
 
-                            <h5 class="mb-1">C for Beginners
-                            </h5>
-                        </div>
-                        <div class="d-flex">
-                            <small class="flex-fill text-center py-1 px-2"><i class="fa fa-star text-warning me-2"></i>
-                                4.5</small>
-                            <small class="flex-fill text-center py-1 px-2"><i class="fa fa-user-graduate me-2"></i>1.1L+
-                                Learners
-                            </small>
-                            <small class="flex-fill text-center py-1 px-2"><i
-                                    class="fa fa-user me-2"></i>Beginner</small>
-                        </div>
-                        <div class="d-flex">
-                            <small class="flex-fill text-left p-2 px-2"><i class="fa fa-clock me-2"></i>1.5
-                                Hrs</small>
-                            <small class="py-1 px-2 fw-bold fs-6 text-center">₹ 0</small>
-                            <small class=" text-primary py-1 px-2 fw-bold fs-6" style="float:right;"><a href="#">Enroll
-                                    Now </a><i class="fa fa-chevron-right me-2 fs-10"></i></small>
-                        </div>
-                    </div>
-                </div>
-            </div>
+<strong>Duration:</strong>
 
-        </div>
-    </div>
-    <!-- Courses End -->
+<?= $course['duration']; ?>
+
+</p>
+
+<p>
+
+<strong>Price:</strong>
+
+<?= number_format($course['price']); ?>
+
+FCFA
+
+</p>
+
+<div class="d-grid gap-2">
+
+    <a
+    href="course-details.php?id=<?= $course['id']; ?>"
+    class="btn btn-outline-primary">
+
+        Learn More
+
+    </a>
+
+    <a
+    href="register.php?course=<?= $course['id']; ?>"
+    class="btn btn-primary">
+
+        Enroll Now
+
+    </a>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<?php endforeach; ?>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- Courses End -->
 
 
     <!-- Footer Start -->

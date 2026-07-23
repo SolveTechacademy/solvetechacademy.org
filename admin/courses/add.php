@@ -202,6 +202,104 @@ rows="5"
 name="description"></textarea>
 
 </div>
+<div class="col-md-12 mb-3">
+
+<label>Short Description</label>
+
+<textarea
+class="form-control"
+rows="3"
+name="short_description"
+placeholder="Brief summary displayed on the course card"></textarea>
+
+</div>
+<div class="col-md-12 mb-3">
+
+<label>Full Course Description</label>
+
+<textarea
+class="form-control"
+rows="8"
+name="full_description"
+placeholder="Explain the course in detail, what students will learn and why they should enroll."></textarea>
+
+</div>
+<div class="col-md-12 mb-3">
+
+<label>Learning Outcomes</label>
+
+<textarea
+class="form-control"
+rows="6"
+name="learning_outcomes"
+placeholder="Example:
+
+• Linux Administration
+• Docker
+• Kubernetes
+• AWS
+• CI/CD
+• Git & GitHub"></textarea>
+
+</div>
+<div class="col-md-12 mb-3">
+
+<label>Career Opportunities</label>
+
+<textarea
+class="form-control"
+rows="5"
+name="career_opportunities"
+placeholder="Example:
+
+DevOps Engineer
+Cloud Engineer
+AWS Engineer
+Platform Engineer
+Site Reliability Engineer"></textarea>
+
+</div>
+<div class="col-md-6 mb-3">
+
+<label>Prerequisites</label>
+
+<textarea
+class="form-control"
+rows="4"
+name="prerequisites"></textarea>
+
+</div>
+<div class="col-md-6 mb-3">
+
+<label>Target Audience</label>
+
+<textarea
+class="form-control"
+rows="4"
+name="target_audience"></textarea>
+
+</div>
+<div class="col-md-12 mb-3">
+
+<label>Certificate Information</label>
+
+<textarea
+class="form-control"
+rows="4"
+name="certificate_info"
+placeholder="Explain the certificate students will receive after completion."></textarea>
+
+</div>
+<div class="col-md-12 mb-3">
+
+<label>Course Demo Video (YouTube URL)</label>
+
+<input
+type="url"
+class="form-control"
+name="demo_video">
+
+</div>
 
 <div class="col-md-12 mb-3">
 

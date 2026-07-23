@@ -1,6 +1,7 @@
 <?php
 session_start();
 
+require_once '../config/auth.php';
 require_once '../config/database.php';
 
 if (!isset($_SESSION['student_login'])) {

@@ -2,6 +2,7 @@
 session_start();
 
 require_once 'config/database.php';
+require_once 'config/functions.php';
 require_once 'mails/send_registration_email.php';
 require_once 'config/mail.php';
 

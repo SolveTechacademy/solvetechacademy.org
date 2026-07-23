@@ -123,15 +123,136 @@ if (!$course) {
 
                 <div class="col-md-4 mb-3">
 
-                    <label>Price</label>
+<label>Mode</label>
 
-                    <input
-                        type="number"
-                        class="form-control"
-                        name="price"
-                        value="<?= $course['price']; ?>">
+<select class="form-select" name="mode">
 
-                </div>
+    <option value="Online" <?= $course['mode']=="Online" ? "selected" : ""; ?>>Online</option>
+
+    <option value="Onsite" <?= $course['mode']=="Onsite" ? "selected" : ""; ?>>Onsite</option>
+
+    <option value="Both" <?= $course['mode']=="Both" ? "selected" : ""; ?>>Both</option>
+
+</select>
+
+</div>
+<div class="col-md-4 mb-3">
+
+<label>Status</label>
+
+<select class="form-select" name="status">
+
+    <option value="Active" <?= $course['status']=="Active" ? "selected" : ""; ?>>Active</option>
+
+    <option value="Inactive" <?= $course['status']=="Inactive" ? "selected" : ""; ?>>Inactive</option>
+
+</select>
+
+</div>
+<div class="col-md-12 mb-3">
+
+<label>Short Description</label>
+
+<textarea
+class="form-control"
+rows="3"
+name="short_description"><?= htmlspecialchars($course['short_description']); ?></textarea>
+
+</div>
+<div class="col-md-12 mb-3">
+
+<label>Full Course Description</label>
+
+<textarea
+class="form-control"
+rows="8"
+name="full_description"><?= htmlspecialchars($course['full_description']); ?></textarea>
+
+</div>
+<div class="col-md-12 mb-3">
+
+<label>Learning Outcomes</label>
+
+<textarea
+class="form-control"
+rows="6"
+name="learning_outcomes"><?= htmlspecialchars($course['learning_outcomes']); ?></textarea>
+
+</div>
+<div class="col-md-12 mb-3">
+
+<label>Career Opportunities</label>
+
+<textarea
+class="form-control"
+rows="5"
+name="career_opportunities"><?= htmlspecialchars($course['career_opportunities']); ?></textarea>
+
+</div>
+<div class="col-md-6 mb-3">
+
+<label>Prerequisites</label>
+
+<textarea
+class="form-control"
+rows="4"
+name="prerequisites"><?= htmlspecialchars($course['prerequisites']); ?></textarea>
+
+</div>
+<div class="col-md-6 mb-3">
+
+<label>Target Audience</label>
+
+<textarea
+class="form-control"
+rows="4"
+name="target_audience"><?= htmlspecialchars($course['target_audience']); ?></textarea>
+
+</div>
+<div class="col-md-12 mb-3">
+
+<label>Certificate Information</label>
+
+<textarea
+class="form-control"
+rows="4"
+name="certificate_info"><?= htmlspecialchars($course['certificate_info']); ?></textarea>
+
+</div>
+<div class="col-md-12 mb-3">
+
+<label>Demo Video URL</label>
+
+<input
+type="url"
+class="form-control"
+name="demo_video"
+value="<?= htmlspecialchars($course['demo_video']); ?>">
+
+</div>
+<div class="col-md-12 mb-3">
+
+<label>Course Thumbnail</label>
+
+<?php if(!empty($course['thumbnail'])){ ?>
+
+<br>
+
+<img
+src="../../assets/uploads/courses/<?= htmlspecialchars($course['thumbnail']); ?>"
+width="120"
+class="img-thumbnail mb-3">
+
+<?php } ?>
+
+<input
+type="file"
+class="form-control"
+name="thumbnail"
+accept="image/*">
+
+</div>
+
 
                 <div class="col-md-12">
 

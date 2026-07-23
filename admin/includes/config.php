@@ -27,4 +27,4 @@ define('ADMIN_URL', BASE_URL . '/admin');
 |--------------------------------------------------------------------------
 */
 
-define('ADMIN_ASSETS', ADMIN_URL . '/assets');
+define('ADMIN_ASSETS', BASE_URL . '/assets');
