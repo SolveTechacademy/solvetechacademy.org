@@ -12,7 +12,7 @@ $category     = trim($_POST['category']);
 $description  = trim($_POST['description']);
 $duration     = trim($_POST['duration']);
 $level        = trim($_POST['level']);
-$price        = trim($_POST['price']);
+$course_fee = trim($_POST['course_fee']);
 $instructor   = trim($_POST['instructor']);
 $mode         = trim($_POST['mode']);
 $status       = trim($_POST['status']);
@@ -80,7 +80,7 @@ certificate_info,
 demo_video,
 duration,
 level,
-price,
+course_fee,
 instructor,
 mode,
 thumbnail,
@@ -112,7 +112,7 @@ $certificate_info,
 $demo_video,
 $duration,
 $level,
-$price,
+$course_fee,
 $instructor,
 $mode,
 $thumbnail,
@@ -122,7 +122,5 @@ $status
 $_SESSION['success'] = "Course created successfully.";
 
 header("Location: index.php");
-
-exit();
 
 exit();

@@ -121,7 +121,36 @@ if (!$course) {
 
                 </div>
 
-                <div class="col-md-4 mb-3">
+  <div class="col-md-4 mb-3">
+
+    <label>Course Fee (FCFA)</label>
+
+    <input
+        type="number"
+        class="form-control"
+        name="course_fee"
+        value="<?= htmlspecialchars($course['course_fee']); ?>"
+        min="0"
+        step="0.01"
+        required>
+
+</div>
+
+<div class="col-md-4 mb-3">
+
+    <label>Mode</label>
+
+    <select class="form-select" name="mode">
+
+        <option value="Online" <?= $course['mode']=="Online" ? "selected" : ""; ?>>Online</option>
+
+        <option value="Onsite" <?= $course['mode']=="Onsite" ? "selected" : ""; ?>>Onsite</option>
+
+        <option value="Both" <?= $course['mode']=="Both" ? "selected" : ""; ?>>Both</option>
+
+    </select>
+
+</div>
 
 <label>Mode</label>
 

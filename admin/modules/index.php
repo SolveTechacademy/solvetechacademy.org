@@ -140,7 +140,7 @@ $modules = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 </td>
 
-            </td>
+    
 
             <td>
                 <a href="../lessons/index.php?module_id=<?= $module['id']; ?>" class="btn btn-info btn-sm">

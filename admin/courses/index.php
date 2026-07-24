@@ -8,6 +8,7 @@ require_once '../includes/header.php';
 require_once '../includes/sidebar.php';
 require_once '../includes/topbar.php';
 
+
 if(isset($_SESSION['success'])){
 
     echo '<div class="alert alert-success alert-dismissible fade show">
@@ -115,7 +116,7 @@ Add Course
 
 <th>Instructor</th>
 
-<th>Price</th>
+<th>course_fee</th>
 
 <th>Status</th>
 
@@ -152,7 +153,7 @@ class="rounded">
 
 <td><?= htmlspecialchars($course['instructor']) ?></td>
 
-<td><?= number_format($course['price']) ?> FCFA</td>
+<td><?= number_format($course['course_fee']) ?> FCFA</td>
 
 <td>
 
@@ -166,28 +167,23 @@ class="rounded">
 
 <td>
 
+<a href="edit.php?id=<?= $course['id']; ?>" class="btn btn-warning btn-sm" title="Edit Course">
+
+    <i class="fas fa-edit"></i>
+
+</a>
+
 <a href="../modules/index.php?course_id=<?= $course['id']; ?>"
-class="btn btn-info btn-sm"
-title="Manage Modules">
+   class="btn btn-info btn-sm"
+   title="Manage Modules">
 
-<i class="fas fa-layer-group"></i>
-
-</a>
-
-<a href="edit.php?id=<?= $course['id']; ?>"
-class="btn btn-warning btn-sm"
-title="Edit Course">
-
-<i class="fas fa-edit"></i>
+    <i class="fas fa-layer-group"></i>
 
 </a>
 
-<a href="delete.php?id=<?= $course['id']; ?>"
-class="btn btn-danger btn-sm"
-onclick="return confirm('Are you sure you want to delete this course?');"
-title="Delete Course">
+<a href="#" class="btn btn-danger btn-sm" title="Delete Course">
 
-<i class="fas fa-trash"></i>
+    <i class="fas fa-trash"></i>
 
 </a>
 

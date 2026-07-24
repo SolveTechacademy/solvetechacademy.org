@@ -260,9 +260,9 @@ style="height:220px;width:100%;object-fit:cover;">
 
 <p>
 
-<strong>Price:</strong>
+<strong>course_fee:</strong>
 
-<?= number_format($course['price']); ?>
+<?= number_format($course['course_fee']); ?>
 
 FCFA
 
@@ -321,7 +321,7 @@ FCFA
                     <h4 class="text-white mb-3">Contact</h4>
                     <p class="mb-2"><i class="fa fa-map-marker-alt me-3"></i>Wilmington, DE, United States, 19802</p>
                     <!-- <p class="mb-2"><i class="fa fa-phone-alt me-3"></i>+1 856-689-7776</p> -->
-                    <p class="mb-2"><i class="fa fa-envelope me-3"></i>info@solvetechacademy.com</p>
+                    <p class="mb-2"><i class="fa fa-envelope me-3"></i>info@solvetechacademy.org</p>
                     <div class="d-flex pt-2">
                         <a class="btn btn-outline-light btn-social" href="https://www.X.com/@solvetech_a"><i class="fab fa-twitter"></i></a>
                         <a class="btn btn-outline-light btn-social" href="https://www.facebook.com/profile.php?id=100077896834045"><i class="fab fa-facebook-f"></i></a>

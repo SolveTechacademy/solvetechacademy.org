@@ -149,12 +149,16 @@ name="level">
 
 <div class="col-md-4 mb-3">
 
-<label>Price (FCFA)</label>
+<label>Course Fee (FCFA)</label>
 
 <input
 type="number"
 class="form-control"
-name="price">
+name="course_fee"
+min="0"
+step="0.01"
+placeholder="Enter course fee"
+required>
 
 </div>
 

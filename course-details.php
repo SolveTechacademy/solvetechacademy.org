@@ -166,7 +166,7 @@ alt="<?= htmlspecialchars($course['course_title']); ?>">
 
                 <p>
                     <strong>Price:</strong>
-                    <?= number_format($course['price']); ?> FCFA
+                    <?= number_format($course['course_fee']); ?> FCFA
                 </p>
 
                 <a

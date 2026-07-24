@@ -11,7 +11,7 @@ $course_title = trim($_POST['course_title']);
 $category     = trim($_POST['category']);
 $duration     = trim($_POST['duration']);
 $level        = trim($_POST['level']);
-$price        = trim($_POST['price']);
+$course_fee = trim($_POST['course_fee']);
 $instructor   = trim($_POST['instructor']);
 $mode                  = trim($_POST['mode']);
 $status                = trim($_POST['status']);
@@ -69,7 +69,7 @@ course_title = ?,
 category = ?,
 duration = ?,
 level = ?,
-price = ?,
+course_fee = ?,
 instructor = ?,
 mode = ?,
 status = ?,
@@ -88,12 +88,13 @@ WHERE id = ?";
 $stmt = $pdo->prepare($sql);
 
 $stmt->execute([
+    
 
     $course_title,
     $category,
     $duration,
     $level,
-    $price,
+    $course_fee,
     $instructor,
     $mode,
     $status,

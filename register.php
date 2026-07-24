@@ -99,7 +99,7 @@ if (isset($_GET['course'])) {
 
 <strong>Fee:</strong>
 
-<?= number_format($course['price']); ?> FCFA
+<?= number_format($course['course_fee']); ?> FCFA
 
 </div>
 

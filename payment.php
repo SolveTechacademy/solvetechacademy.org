@@ -20,7 +20,7 @@ students.fullname,
 students.email,
 
 courses.course_title,
-courses.price
+courses.course_fee
 
 FROM registrations
 
@@ -148,7 +148,7 @@ border-radius:12px;
 
 <strong>
 
-<?= number_format($registration['price']); ?>
+<?= number_format($registration['course_fee']); ?>
 
 FCFA
 
@@ -307,7 +307,7 @@ Amount Paid
 type="number"
 name="amount"
 class="form-control"
-value="<?= $registration['price']; ?>"
+value="<?= $registration['course_fee']; ?>"
 required>
 
 </div>
