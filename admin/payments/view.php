@@ -443,11 +443,11 @@ Status
 
 <?php
 
-$statusClass = match($payment['status']){
+$statusClass = match(strtolower(trim($payment['status']))){
 
-    'Approved' => 'success',
-    'Pending'  => 'warning',
-    'Rejected' => 'danger',
+    'approved' => 'success',
+    'pending'  => 'warning',
+    'rejected' => 'danger',
     default    => 'secondary'
 
 };
@@ -564,8 +564,26 @@ Payment Proof
 
 <div class="text-center">
 
+<?php
+$proof = '../../uploads/payments/' . $payment['payment_proof'];
+
+if (!empty($payment['payment_proof']) && file_exists($proof)):
+?>
+
 <img
-src="../../uploads/payments/<?= htmlspecialchars($payment['payment_proof']); ?>"
+src="<?= $proof; ?>"
+class="img-fluid rounded shadow"
+style="max-height:500px;">
+
+<?php else: ?>
+
+<div class="alert alert-warning text-center">
+
+No payment proof uploaded.
+
+</div>
+
+<?php endif; ?>
 class="img-fluid rounded shadow"
 style="max-height:500px;">
 

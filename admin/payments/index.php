@@ -128,18 +128,50 @@ if($balance<=0){
 <td><?= htmlspecialchars($payment['payment_method']); ?></td>
 
 <td>
-<?php
-switch($paymentStatus){
-case "Paid":
-echo '<span class="badge bg-success">Paid</span>';
-break;
-case "Partially Paid":
-echo '<span class="badge bg-warning text-dark">Partially Paid</span>';
-break;
-default:
-echo '<span class="badge bg-danger">Unpaid</span>';
-}
-?>
+
+<?php if($payment['status']=='Approved'): ?>
+
+<span class="badge bg-success">
+Approved
+</span>
+
+<?php elseif($payment['status']=='Rejected'): ?>
+
+<span class="badge bg-danger">
+Rejected
+</span>
+
+<?php else: ?>
+
+<span class="badge bg-warning text-dark">
+Pending
+</span>
+
+<?php endif; ?>
+
+</td>
+<td>
+
+<?php if($payment['status']=='Approved'): ?>
+
+<span class="badge bg-success">
+Approved
+</span>
+
+<?php elseif($payment['status']=='Rejected'): ?>
+
+<span class="badge bg-danger">
+Rejected
+</span>
+
+<?php else: ?>
+
+<span class="badge bg-warning text-dark">
+Pending
+</span>
+
+<?php endif; ?>
+
 </td>
 
 <td><?= date('d M Y',strtotime($payment['created_at'])); ?></td>
@@ -147,24 +179,49 @@ echo '<span class="badge bg-danger">Unpaid</span>';
 <td>
 <div class="btn-group" role="group">
 
-<a href="view.php?id=<?= $payment['id']; ?>" class="btn btn-primary btn-sm" title="View Receipt">
+<a href="view.php?id=<?= $payment['id']; ?>" class="btn btn-primary btn-sm" title="View">
 <i class="fas fa-eye"></i>
 </a>
 
-<a href="print.php?id=<?= $payment['id']; ?>" class="btn btn-info btn-sm" title="Print Receipt" target="_blank">
+<?php if($payment['status']!='Approved'): ?>
+
+<a href="approve.php?id=<?= $payment['id']; ?>"
+class="btn btn-success btn-sm"
+title="Approve Payment"
+onclick="return confirm('Approve this payment?');">
+
+<i class="fas fa-check"></i>
+
+</a>
+
+<a href="reject.php?id=<?= $payment['id']; ?>"
+class="btn btn-danger btn-sm"
+title="Reject Payment"
+onclick="return confirm('Reject this payment?');">
+
+<i class="fas fa-times"></i>
+
+</a>
+
+<?php endif; ?>
+
+<a href="print.php?id=<?= $payment['id']; ?>" class="btn btn-info btn-sm" target="_blank">
 <i class="fas fa-print"></i>
 </a>
 
-<a href="pdf.php?id=<?= $payment['id']; ?>" class="btn btn-secondary btn-sm" title="Download PDF" target="_blank">
+<a href="pdf.php?id=<?= $payment['id']; ?>" class="btn btn-secondary btn-sm" target="_blank">
 <i class="fas fa-file-pdf"></i>
 </a>
 
-<a href="edit.php?id=<?= $payment['id']; ?>" class="btn btn-warning btn-sm" title="Edit Payment">
+<a href="edit.php?id=<?= $payment['id']; ?>" class="btn btn-warning btn-sm">
 <i class="fas fa-edit"></i>
 </a>
 
-<a href="delete.php?id=<?= $payment['id']; ?>" class="btn btn-danger btn-sm" onclick="return confirm('Delete this payment?');">
+<a href="delete.php?id=<?= $payment['id']; ?>" class="btn btn-danger btn-sm"
+onclick="return confirm('Delete this payment?');">
+
 <i class="fas fa-trash"></i>
+
 </a>
 
 </div>

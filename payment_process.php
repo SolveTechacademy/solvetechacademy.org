@@ -74,6 +74,13 @@ $stmt->execute([
     $fileName,
     'Pending'
 ]);
+$update = $pdo->prepare("
+UPDATE registrations
+SET payment_status='Pending'
+WHERE id=?
+");
+
+$update->execute([$registrationID]);
 
 $subject="Payment Submitted Successfully";
 
@@ -231,5 +238,8 @@ sendMail(
     $adminMessage
 );
 
-header("Location: login.php?payment=success");
+$_SESSION['success'] =
+"Payment submitted successfully. Your payment is awaiting administrator approval.";
+
+header("Location: login.php");
 exit();

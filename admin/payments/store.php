@@ -14,7 +14,7 @@ $payment_method  = trim($_POST['payment_method']);
 $transaction_id  = trim($_POST['transaction_id']);
 
 // Admin recorded payments are automatically approved
-$status = "Approved";
+$status = "Pending";
 
 $payment_proof = "";
 
@@ -113,13 +113,42 @@ $success = $stmt->execute([
 
 if ($success) {
 
-    $_SESSION['success'] = "Payment recorded successfully.";
+    /*
+    |--------------------------------------------------------------------------
+    | Activate Registration
+    |--------------------------------------------------------------------------
+    */
+
+    $stmt = $pdo->prepare("
+        UPDATE registrations
+        SET approval_status='Approved'
+        WHERE id=?
+    ");
+
+    $stmt->execute([$registration_id]);
+
+    /*
+    |--------------------------------------------------------------------------
+    | Activate Student
+    |--------------------------------------------------------------------------
+    */
+
+    $stmt = $pdo->prepare("
+        UPDATE students s
+        INNER JOIN registrations r
+            ON r.student_id=s.id
+        SET s.status='Active'
+        WHERE r.id=?
+    ");
+
+    $stmt->execute([$registration_id]);
+
+    $_SESSION['success'] = "Payment recorded and student activated successfully.";
 
 } else {
 
     $_SESSION['error'] = "Unable to record payment.";
 
 }
-
 header("Location: index.php");
 exit();

@@ -21,6 +21,9 @@
 <a href="<?= ADMIN_URL; ?>/courses/index.php" class="text-white text-decoration-none d-block px-4 py-3">
 <i class="fas fa-book me-2"></i> Courses
 </a>
+<a href="<?= ADMIN_URL; ?>/quizzes/index.php" class="text-white text-decoration-none d-block px-4 py-3">
+<i class="fas fa-question-circle me-2"></i> Quizzes
+</a>
 
 <a href="<?= ADMIN_URL; ?>/payments/index.php" class="text-white text-decoration-none d-block px-4 py-3">
 <i class="fas fa-credit-card me-2"></i> Payments

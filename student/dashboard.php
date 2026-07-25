@@ -14,13 +14,26 @@ $student_db_id = $_SESSION['student_db_id'];
 $stmt = $pdo->prepare("
 SELECT *
 FROM students
-WHERE id=?
+WHERE id = ?
 LIMIT 1
 ");
 
 $stmt->execute([$student_db_id]);
 
 $student = $stmt->fetch(PDO::FETCH_ASSOC);
+
+if (!$student) {
+    session_destroy();
+    header("Location: ../login.php");
+    exit;
+}
+
+if (strcasecmp(trim($student['status']), 'Active') !== 0) {
+    session_destroy();
+    $_SESSION['error'] = "Your account is awaiting approval.";
+    header("Location: ../login.php");
+    exit;
+}
 
 $courseQuery = $pdo->prepare("
 SELECT
@@ -36,7 +49,8 @@ FROM registrations
 INNER JOIN courses
 ON registrations.course_id = courses.id
 
-WHERE registrations.student_id=?
+WHERE registrations.student_id = ?
+AND registrations.approval_status = 'Approved'
 ");
 
 $courseQuery->execute([$student_db_id]);

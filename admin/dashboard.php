@@ -84,6 +84,29 @@ require_once 'includes/topbar.php';
         </div>
 
     </div>
+    <?php
+$pendingRegistrations = $pdo->query("
+SELECT COUNT(*)
+FROM registrations
+WHERE approval_status='Pending'
+")->fetchColumn();
+?>
+
+<div class="col-lg-3 col-md-6 mb-4">
+
+    <div class="card shadow border-warning">
+
+        <div class="card-body">
+
+            <h6>Pending Approvals</h6>
+
+            <h2><?= $pendingRegistrations; ?></h2>
+
+        </div>
+
+    </div>
+
+</div>
 
     <div class="col-lg-3 col-md-6 mb-4">
 

@@ -5,6 +5,35 @@ if (session_status() === PHP_SESSION_NONE) {
 }
 
 require_once __DIR__ . '/database.php';
+require_once __DIR__ . '/session.php';
+
+/*
+|--------------------------------------------------------------------------
+| Generate CSRF Token
+|--------------------------------------------------------------------------
+*/
+if (empty($_SESSION['csrf_token'])) {
+    $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
+}
+
+/*
+|--------------------------------------------------------------------------
+| Session Timeout (30 Minutes)
+|--------------------------------------------------------------------------
+*/
+if (isset($_SESSION['last_activity'])) {
+
+    if ((time() - $_SESSION['last_activity']) > 1800) {
+
+        session_unset();
+        session_destroy();
+
+        header("Location: /solvetechacademy.org/login.php?expired=1");
+        exit();
+    }
+}
+
+$_SESSION['last_activity'] = time();
 
 /*
 |--------------------------------------------------------------------------
@@ -33,5 +62,17 @@ if (!in_array($currentPage, $publicPages)) {
         exit();
 
     }
+/*
+|--------------------------------------------------------------------------
+| Validate Student Session
+|--------------------------------------------------------------------------
+*/
+if (empty($_SESSION['student_db_id'])) {
 
+    session_destroy();
+
+    header("Location: /solvetechacademy.org/login.php");
+
+    exit();
+}
 }

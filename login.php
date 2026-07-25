@@ -2,6 +2,7 @@
 session_start();
 
 require_once 'config/database.php';
+ 
 
 if(isset($_SESSION['student_login'])){
     header("Location: student/dashboard.php");
@@ -58,6 +59,11 @@ if(isset($_POST['login'])){
                     </div>";
 
                 }else{
+                    session_regenerate_id(true);
+
+                    $_SESSION['login_time'] = time();
+
+                    $_SESSION['last_activity'] = time();
 
                     $_SESSION['student_login']=true;
 
@@ -68,6 +74,12 @@ if(isset($_POST['login'])){
                     $_SESSION['student_name']=$student['fullname'];
 
                     $_SESSION['student_email']=$student['email'];
+
+                    if(isset($_POST['remember'])){
+                        setcookie("remember_email", $student['email'], time()+(86400*30), "/", "", false, true);
+                    }else{
+                        setcookie("remember_email", "", time()-3600, "/");
+                    }
 
                     header("Location: student/dashboard.php");
 
@@ -109,6 +121,7 @@ if(isset($_POST['login'])){
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
 
 </head>
 
@@ -146,7 +159,9 @@ Student Login
 type="email"
 name="email"
 class="form-control"
-required>
+value="<?= htmlspecialchars($_COOKIE['remember_email'] ?? $_POST['email'] ?? '') ?>"
+required
+autocomplete="email">
 
 </div>
 
@@ -154,11 +169,41 @@ required>
 
 <label>Password</label>
 
-<input
-type="password"
-name="password"
-class="form-control"
-required>
+<div class="input-group">
+
+    <input
+    type="password"
+    id="password"
+    name="password"
+    class="form-control"
+    required
+    autocomplete="current-password">
+
+    <button
+    type="button"
+    class="btn btn-outline-secondary"
+    onclick="togglePassword()">
+
+        <i id="eyeIcon" class="fas fa-eye"></i>
+
+    </button>
+
+</div>
+<div class="form-check mb-3">
+
+    <input
+    class="form-check-input"
+    type="checkbox"
+    name="remember"
+    id="remember">
+
+    <label class="form-check-label" for="remember">
+
+        Remember Me
+
+    </label>
+
+</div>
 
 </div>
 
@@ -169,6 +214,10 @@ name="login">
 Login
 
 </button>
+
+<div class="text-end mt-3">
+<a href="forgot-password.php">Forgot Password?</a>
+</div>
 
 </form>
 
@@ -198,6 +247,9 @@ Register Here
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
+<script>
+function togglePassword(){const p=document.getElementById('password');const e=document.getElementById('eyeIcon');if(p.type==='password'){p.type='text';e.classList.replace('fa-eye','fa-eye-slash');}else{p.type='password';e.classList.replace('fa-eye-slash','fa-eye');}}
+</script>
 </body>
 
 </html>

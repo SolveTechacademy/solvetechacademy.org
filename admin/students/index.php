@@ -1,275 +1,574 @@
 <?php
 
 require_once '../includes/auth.php';
-$students = $pdo->query("
+require_once 'includes/functions.php';
+// require_once '../config/database.php';
+
+$pageTitle = "Student Management";
+
+/*
+|--------------------------------------------------------------------------
+| Fetch Students (Latest Enrollment)
+|--------------------------------------------------------------------------
+*/
+
+$sql = "
 SELECT
     s.id,
     s.student_id,
     s.fullname,
     s.email,
     s.phone,
+    s.country,
+    s.city,
+    s.qualification,
+    s.occupation,
+    s.profile_photo,
     s.status,
-    r.payment_status,
-    c.course_title
+    s.created_at,
+
+    (
+        SELECT c.course_title
+        FROM registrations r
+        INNER JOIN courses c
+            ON c.id = r.course_id
+        WHERE r.student_id = s.id
+        ORDER BY r.id DESC
+        LIMIT 1
+    ) AS current_course,
+
+    (
+        SELECT payment_status
+        FROM registrations r
+        WHERE r.student_id = s.id
+        ORDER BY r.id DESC
+        LIMIT 1
+    ) AS payment_status
+
 FROM students s
-LEFT JOIN registrations r ON s.id = r.student_id
-LEFT JOIN courses c ON r.course_id = c.id
-ORDER BY s.id DESC
-")->fetchAll(PDO::FETCH_ASSOC);
-$pageTitle = "Student Management";
+
+ORDER BY s.created_at DESC
+";
+
+$stmt = $pdo->prepare($sql);
+$stmt->execute();
+
+$students = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
 require_once '../includes/header.php';
-require_once '../includes/sidebar.php';
-require_once '../includes/topbar.php';
 ?>
 
-<h2 class="mb-4">
-    Student Management
-</h2>
-<div class="row mb-4">
+<link rel="stylesheet" href="<?= ADMIN_ASSETS; ?>/css/solvetech-admin.css">
 
-<div class="col-md-3">
+<?php require_once '../includes/sidebar.php'; ?>
 
-<div class="card shadow">
+<?php require_once '../includes/topbar.php'; ?>
 
-<div class="card-body">
 
-<h6>Total Students</h6>
 
-<h2><?= count($students); ?></h2>
+    <!-- ========================================= -->
+    <!-- PAGE HEADER -->
+    <!-- ========================================= -->
 
-</div>
+    <div class="st-card mb-4">
 
-</div>
+        <div class="row align-items-center">
 
-</div>
+            <div class="col-lg-8">
 
-<div class="col-md-3">
+                <h2 class="page-title mb-2">
 
-<div class="card shadow">
+                    <i class="bi bi-people-fill text-primary me-2"></i>
 
-<div class="card-body">
+                    Student Management
 
-<h6>Active</h6>
+                </h2>
 
-<h2>
+                <p class="page-subtitle">
 
-<?= count(array_filter($students,function($s){
+                    Manage student registrations, enrollments,
+                    payments, certificates and academic activities.
 
-return $s['status']=="Active";
+                </p>
 
-})); ?>
+            </div>
 
-</h2>
+            <div class="col-lg-4 text-lg-end mt-3 mt-lg-0">
 
-</div>
+                <a href="create.php" class="btn btn-primary">
 
-</div>
+                    <i class="bi bi-person-plus-fill me-2"></i>
 
-</div>
+                    Add Student
 
-<div class="col-md-3">
+                </a>
 
-<div class="card shadow">
+                <a href="import.php" class="btn btn-light">
 
-<div class="card-body">
+                    <i class="bi bi-upload me-2"></i>
 
-<h6>Pending</h6>
+                    Import
 
-<h2>
+                </a>
 
-<?= count(array_filter($students,function($s){
+                <a href="export.php" class="btn btn-light">
 
-return $s['status']=="Pending";
+                    <i class="bi bi-download me-2"></i>
 
-})); ?>
+                    Export
 
-</h2>
+                </a>
 
-</div>
+            </div>
 
-</div>
+        </div>
 
-</div>
+    </div>
 
-<div class="col-md-3">
+    <!-- ========================================= -->
+    <!-- STATISTICS -->
+    <!-- ========================================= -->
 
-<div class="card shadow">
+    <?php include 'includes/stats_cards.php'; ?>
 
-<div class="card-body">
+    <!-- ========================================= -->
+    <!-- FILTERS -->
+    <!-- ========================================= -->
 
-<h6>Suspended</h6>
+    <?php include 'includes/filters.php'; ?>
 
-<h2>
+    <!-- ========================================= -->
+    <!-- BULK ACTIONS -->
+    <!-- ========================================= -->
 
-<?= count(array_filter($students,function($s){
+    <?php include 'includes/bulk_toolbar.php'; ?>
 
-return $s['status']=="Suspended";
+    <!-- ========================================= -->
+    <!-- VIEW SWITCH -->
+    <!-- ========================================= -->
 
-})); ?>
+    <div class="d-flex justify-content-between align-items-center mb-4">
 
-</h2>
+        <h5 class="fw-bold mb-0">
 
-</div>
+            Registered Students
 
-</div>
+        </h5>
 
-</div>
+        <div class="btn-group">
 
-</div>
-<div class="card shadow">
+            <button
+                id="cardViewBtn"
+                class="btn btn-primary">
 
-<div class="card-header bg-primary text-white">
+                <i class="bi bi-grid-3x3-gap-fill me-2"></i>
 
-<h5 class="mb-0">
+                Card View
 
-Registered Students
+            </button>
 
-</h5>
+            <button
+                id="tableViewBtn"
+                class="btn btn-outline-primary">
 
-</div>
+                <i class="bi bi-table me-2"></i>
 
-<div class="card-body">
+                Table View
 
-<table id="studentsTable" class="table table-striped table-hover">
+            </button>
 
-<thead>
+        </div>
 
-<tr>
+    </div>
 
-<th>#</th>
+    <!-- ========================================= -->
+    <!-- CARD VIEW -->
+    <!-- ========================================= -->
 
-<th>Student ID</th>
+    <div id="cardView">
 
-<th>Name</th>
+        <div class="row g-4">
 
-<th>Email</th>
+            <?php foreach($students as $student): ?>
 
-<th>Phone</th>
+                <?php include 'includes/student_card.php'; ?>
 
-<th>Course</th>
+            <?php endforeach; ?>
 
-<th>Status</th>
+        </div>
 
-<th>Payment</th>
+    </div>
 
-<th>Actions</th>
+    <!-- ========================================= -->
+    <!-- TABLE VIEW -->
+    <!-- ========================================= -->
 
-</tr>
+    <div id="tableView" style="display:none;">
 
-</thead>
+        <div class="st-card">
 
-<tbody>
+            <div class="table-responsive">
 
-<?php foreach($students as $student){ ?>
+                <table
+                    id="studentsTable"
+                    class="table table-hover align-middle">
 
-<tr>
+                    <thead>
 
-<td><?= $student['id']; ?></td>
+                    <tr>
 
-<td><?= htmlspecialchars($student['student_id']); ?></td>
+                        <th width="40">
 
-<td><?= htmlspecialchars($student['fullname']); ?></td>
+                            <input
+                                type="checkbox"
+                                id="selectAllStudents">
 
-<td><?= htmlspecialchars($student['email']); ?></td>
+                        </th>
 
-<td><?= htmlspecialchars($student['phone']); ?></td>
+                        <th>Student</th>
 
-<td><?= htmlspecialchars($student['course_title'] ?? 'Not Assigned'); ?></td>
+                        <th>Email</th>
 
-<td>
+                        <th>Phone</th>
 
-<?php
+                        <th>Course</th>
 
-if($student['status']=="Active"){
+                        <th>Status</th>
 
-    echo '<span class="badge bg-success">Active</span>';
+                        <th>Payment</th>
 
-}elseif($student['status']=="Pending"){
+                        <th width="160">
 
-    echo '<span class="badge bg-warning text-dark">Pending</span>';
+                            Actions
 
-}else{
+                        </th>
 
-    echo '<span class="badge bg-danger">Suspended</span>';
+                    </tr>
 
-}
+                    </thead>
 
-?>
+                    <tbody>
+                                            <?php foreach($students as $student): ?>
 
-</td>
+                        <?php
 
-<td>
+                        $paymentStatus = $student['payment_status'] ?? 'Pending';
 
-<?php
+                        switch(strtolower($paymentStatus)){
 
-$payment = $student['payment_status'] ?? 'Pending';
+                            case 'paid':
+                                $paymentBadge = 'success';
+                                break;
 
-if($payment=="Paid"){
+                            case 'partial':
+                                $paymentBadge = 'warning';
+                                break;
 
-    echo '<span class="badge bg-success">Paid</span>';
+                            case 'failed':
+                            case 'unpaid':
+                                $paymentBadge = 'danger';
+                                break;
 
-}elseif($payment=="Pending"){
+                            default:
+                                $paymentBadge = 'secondary';
+                                break;
 
-    echo '<span class="badge bg-warning text-dark">Pending</span>';
+                        }
 
-}else{
+                        ?>
 
-    echo '<span class="badge bg-danger">'.$payment.'</span>';
+                        <tr>
 
-}
+                            <td>
 
-?>
+                                <input
+                                    type="checkbox"
+                                    class="student-checkbox"
+                                    value="<?= $student['id']; ?>">
 
-</td>
+                            </td>
 
-<td>
+                            <td>
 
-<div class="btn-group">
+                                <div class="d-flex align-items-center">
 
-<a href="view.php?id=<?= $student['id']; ?>" class="btn btn-primary btn-sm">
-    <i class="fas fa-eye"></i>
-</a>
+                                    <img
+                                        src="<?= studentPhoto($student['profile_photo']); ?>"
+                                        class="avatar me-3"
+                                        alt="<?= e($student['fullname']); ?>">
 
-<?php if($student['status'] == "Pending"){ ?>
+                                    <div>
 
-<a href="approve.php?id=<?= $student['id']; ?>"
-   class="btn btn-success btn-sm"
-   onclick="return confirm('Approve this student?');">
+                                        <div class="fw-bold">
 
-    <i class="fas fa-check"></i>
+                                            <?= e($student['fullname']); ?>
 
-</a>
+                                        </div>
 
-<?php } ?>
+                                        <small class="text-muted">
 
-<a href="edit.php?id=<?= $student['id']; ?>" class="btn btn-warning btn-sm">
-    <i class="fas fa-edit"></i>
-</a>
+                                            <?= e($student['student_id']); ?>
 
-<a href="delete.php?id=<?= $student['id']; ?>"
-   class="btn btn-danger btn-sm"
-   onclick="return confirm('Delete this student?');">
+                                        </small>
 
-    <i class="fas fa-trash"></i>
+                                    </div>
 
-</a>
+                                </div>
 
-</div>
+                            </td>
 
-</td>
+                            <td>
 
-</tr>
+                                <?= e($student['email']); ?>
 
-<?php } ?>
+                            </td>
 
-</tbody>
+                            <td>
 
-</table>
+                                <?= e($student['phone']); ?>
 
-</div>
+                            </td>
 
-</div>
+                            <td>
 
-<?php
+                                <?php if(!empty($student['current_course'])): ?>
 
-require_once '../includes/footer.php';
+                                    <span class="badge badge-soft-primary">
+
+                                        <?= e($student['current_course']); ?>
+
+                                    </span>
+
+                                <?php else: ?>
+
+                                    <span class="badge bg-secondary">
+
+                                        No Enrollment
+
+                                    </span>
+
+                                <?php endif; ?>
+
+                            </td>
+
+                            <td>
+
+                                <span class="badge bg-<?= statusBadge($student['status']); ?>">
+                                <?= e($student['status']); ?>
+                            </span>
+
+                            </td>
+
+                            <td>
+
+                                <span class="badge bg-<?= $paymentBadge; ?>">
+
+                                    <?= ucfirst($paymentStatus); ?>
+
+                                </span>
+
+                            </td>
+
+                            <td>
+
+                                <?php include 'includes/quick_actions.php'; ?>
+
+                            </td>
+
+                        </tr>
+
+                    <?php endforeach; ?>
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- END TABLE VIEW -->
+     </div>
+
+<?php require_once '../includes/footer.php'; ?>
+
+<script>
+
+document.addEventListener('DOMContentLoaded', function () {
+
+    const cardView = document.getElementById('cardView');
+    const tableView = document.getElementById('tableView');
+
+    const cardBtn = document.getElementById('cardViewBtn');
+    const tableBtn = document.getElementById('tableViewBtn');
+
+    /*
+    |--------------------------------------------------------------------------
+    | View Toggle
+    |--------------------------------------------------------------------------
+    */
+
+    cardBtn.addEventListener('click', function () {
+
+        cardView.style.display = 'block';
+        tableView.style.display = 'none';
+
+        cardBtn.classList.remove('btn-outline-primary');
+        cardBtn.classList.add('btn-primary');
+
+        tableBtn.classList.remove('btn-primary');
+        tableBtn.classList.add('btn-outline-primary');
+
+    });
+
+    tableBtn.addEventListener('click', function () {
+
+        cardView.style.display = 'none';
+        tableView.style.display = 'block';
+
+        tableBtn.classList.remove('btn-outline-primary');
+        tableBtn.classList.add('btn-primary');
+
+        cardBtn.classList.remove('btn-primary');
+        cardBtn.classList.add('btn-outline-primary');
+
+    });
+
+    /*
+    |--------------------------------------------------------------------------
+    | DataTable
+    |--------------------------------------------------------------------------
+    */
+
+    
+    /*
+    |--------------------------------------------------------------------------
+    | Select All
+    |--------------------------------------------------------------------------
+    */
+
+    const selectAll = document.getElementById('selectAllStudents');
+
+    if(selectAll){
+
+        selectAll.addEventListener('change', function(){
+
+            document.querySelectorAll('.student-checkbox').forEach(function(box){
+
+                box.checked = selectAll.checked;
+
+            });
+
+        });
+
+    }
+
+    /*
+    |--------------------------------------------------------------------------
+    | Live Search (Card View)
+    |--------------------------------------------------------------------------
+    */
+
+    const search = document.getElementById('studentSearch');
+
+    if(search){
+
+        search.addEventListener('keyup', function(){
+
+            let value = this.value.toLowerCase();
+
+            document.querySelectorAll('.student-card').forEach(function(card){
+
+                card.style.display = card.innerText.toLowerCase().includes(value)
+                    ? ''
+                    : 'none';
+
+            });
+
+        });
+
+    }
+
+    /*
+    |--------------------------------------------------------------------------
+    | Status Filter
+    |--------------------------------------------------------------------------
+    */
+
+    const statusFilter = document.getElementById('statusFilter');
+
+    if(statusFilter){
+
+        statusFilter.addEventListener('change', function(){
+
+            let value = this.value.toLowerCase();
+
+            document.querySelectorAll('.student-card').forEach(function(card){
+
+                if(value === ''){
+
+                    card.style.display = '';
+
+                    return;
+
+                }
+
+                let status = card.dataset.status ?? '';
+
+                card.style.display =
+                    status.toLowerCase() === value
+                        ? ''
+                        : 'none';
+
+            });
+
+        });
+
+    }
+
+    /*
+    |--------------------------------------------------------------------------
+    | Country Filter
+    |--------------------------------------------------------------------------
+    */
+
+    const countryFilter = document.getElementById('countryFilter');
+
+    if(countryFilter){
+
+        countryFilter.addEventListener('change', function(){
+
+            let value = this.value.toLowerCase();
+
+            document.querySelectorAll('.student-card').forEach(function(card){
+
+                if(value === ''){
+
+                    card.style.display='';
+
+                    return;
+
+                }
+
+                let country = card.dataset.country ?? '';
+
+                card.style.display =
+                    country.toLowerCase() === value
+                        ? ''
+                        : 'none';
+
+            });
+
+        });
+
+    }
+
+});
+
+</script>
+
+</body>
+
+</html>
