@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8">
-    <title>SolveTech : Online Testimonial</title>
+    <title>SolveTech : Team</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta content="" name="keywords">
     <meta content="" name="description">
@@ -33,6 +33,7 @@
     <link href="css/style.css" rel="stylesheet">
 
 
+
 </head>
 
 <body>
@@ -58,14 +59,15 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarCollapse">
             <div class="navbar-nav ms-auto p-4 p-lg-0">
-                <a href="index.html" class="nav-item nav-link active">Home</a>
-                <a href="about.html" class="nav-item nav-link">About</a>
-                <a href="courses.html" class="nav-item nav-link">Courses</a>
+                <a href="index.php" class="nav-item nav-link active">Home</a>
+                <a href="about.php" class="nav-item nav-link">About</a>
+                <a href="courses.php" class="nav-item nav-link">Courses</a>
                 <div class="nav-item dropdown">
                     <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Pages</a>
                     <div class="dropdown-menu fade-down m-0">
-                        <a href="team.html" class="dropdown-item">Our Team</a>
-                        <a href="testimonial.html" class="dropdown-item">Testimonial</a>
+                        <a href="team.php" class="dropdown-item">Our Team</a>
+                        <a href="testimonial.php" class="dropdown-item">Testimonial</a>
+
                     </div>
                 </div>
                 <a href="contact.php" class="nav-item nav-link">Contact</a>
@@ -85,11 +87,11 @@
         <div class="container py-5">
             <div class="row justify-content-center">
                 <div class="col-lg-10 text-center">
-                    <h1 class="display-3 text-white animated slideInDown">Student Reviews</h1>
+                    <h1 class="display-3 text-white animated slideInDown">Our Team</h1>
                     <nav aria-label="breadcrumb">
                         <ol class="breadcrumb justify-content-center">
                             <li class="breadcrumb-item"><a class="text-white" href="index.html">Home</a></li>
-                            <li class="breadcrumb-item text-white active" aria-current="page">Reviews</li>
+                            <li class="breadcrumb-item text-white active" aria-current="page">Team</li>
                         </ol>
                     </nav>
                 </div>
@@ -99,58 +101,59 @@
     <!-- Header End -->
 
 
-    <!-- Testimonial Start -->
-    <div class="container-xxl py-5 wow fadeInUp" data-wow-delay="0.1s">
+
+    <!-- Team Start -->
+    <div class="container-xxl py-5">
         <div class="container">
-            <div class="text-center">
-                <h1 class=" bg-white text-center px-3" style="color: #fb873f;">Success stories</h1>
-                <p class="mb-5">Can SolveTech courses help your career? Our learners tell us how.</p>
-            </div>
-            <div class="owl-carousel testimonial-carousel position-relative">
-                <div class="testimonial-item text-center">
-                    <img class="border rounded-circle p-2 mx-auto mb-3" src="img/brenda.jpg"
-                        style="width: 80px; height: 80px;">
-                    <h5 class="mb-0">Breda Asong</h5>
-                    <div class="testimonial-text bg-light text-center p-4">
-                        <p class="mb-0">I stumbled upon SolveTech while searching for free courses. The quality
-                            surpassed my expectations! The content was rich, and the instructors were knowledgeable.
-                            I've already recommended it to my friends.</p>
+            <div class="row g-4">
+                <div class="col-lg-6 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
+                    <div class="team-item bg-light">
+                        <div class="overflow-hidden text-center pt-5">
+                            <img class="img-fluid" src="img/khan1.jpg" alt="" style="height: 300px; width: 300px;">
+                        </div>
+                        <div class="position-relative d-flex justify-content-center" style="margin-top: -23px;">
+                            <div class="bg-light d-flex justify-content-center pt-2 px-1">
+                                <a target="_blank" class="btn btn-sm-square btn-primary mx-1"
+                                    href="https://www.linkedin.com/in/nkam-valery-8a835625a/"><i
+                                        class="fab fa-linkedin"></i></a>
+                                <a target="_blank" class="btn btn-sm-square btn-primary mx-1"
+                                    href="mailto:nkamvalery14@gmail.com"><i class="fa fa-envelope"></i></a>
+                                <a target="_blank" class="btn btn-sm-square btn-primary mx-1"
+                                    href="https://github.com/SolveTechacademy"><i class="fab fa-github"></i></a>
+                            </div>
+                        </div>
+                        <div class="text-center p-4">
+                            <h5 class="mb-0">Valery Nkam</h5>
+                            <small>Team Leader</small>
+                        </div>
                     </div>
                 </div>
-                <div class="testimonial-item text-center">
-                    <img class="border rounded-circle p-2 mx-auto mb-3" src="img/fongwaa.jpeg"
-                        style="width: 80px; height: 80px;">
-                    <h5 class="mb-0">Don John</h5>
-                    <div class="testimonial-text bg-light text-center p-4">
-                        <p class="mb-0">As a working professional, finding free courses that match my schedule was a
-                            game-changer. The courses are engaging, and the community aspect adds immense value. Highly
-                            recommended!</p>
-                    </div>
-                </div>
-                <div class="testimonial-item text-center">
-                    <img class="border rounded-circle p-2 mx-auto mb-3" src="img/akex.JPG"
-                        style="width: 80px; height: 80px;">
-                    <h5 class="mb-0">Alexandra M.</h5>
-                    <div class="testimonial-text bg-light text-center p-4">
-                        <p class="mb-0">I've taken multiple courses here, and each one has been fantastic. The
-                            platform's design makes learning enjoyable, and the knowledge gained is invaluable. It's
-                            hard to believe these courses are free!</p>
-                    </div>
-                </div>
-                <div class="testimonial-item text-center">
-                    <img class="border rounded-circle p-2 mx-auto mb-3" src="img/Nancy.jpeg"
-                        style="width: 80px; height: 80px;">
-                    <h5 class="mb-0">Nancy C.</h5>
-                    <div class="testimonial-text bg-light text-center p-4">
-                        <p class="mb-0">I'm amazed at the quality of the free courses available. The instructors are
-                            experts in their fields, and the interactive lessons make learning a breeze. Thank you for
-                            this opportunity!</p>
+                <div class="col-lg-6 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
+                    <div class="team-item bg-light">
+                        <div class="overflow-hidden text-center pt-5">
+                            <img class="img-fluid" src="img/programimg.jpg" alt="" style="height: 300px; width: 300px;">
+                        </div>
+                        <div class="position-relative d-flex justify-content-center" style="margin-top: -23px;">
+                            <div class="bg-light d-flex justify-content-center pt-2 px-1">
+                                <a target="_blank" class="btn btn-sm-square btn-primary mx-1"
+                                    href="#"><i
+                                        class="fab fa-linkedin"></i></a>
+                                <a target="_blank" class="btn btn-sm-square btn-primary mx-1"
+                                    href="mailto:#"><i class="fa fa-envelope"></i></a>
+                                <a target="_blank" class="btn btn-sm-square btn-primary mx-1"
+                                    href="#"><i class="fab fa-github"></i></a>
+                            </div>
+                        </div>
+                        <div class="text-center p-4">
+                            <h5 class="mb-0">Miss Adel</h5>
+                            <small>Team Member</small>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <!-- Testimonial End -->
+    <!-- Team End -->
 
 
     <!-- Footer Start -->

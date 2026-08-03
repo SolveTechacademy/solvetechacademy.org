@@ -16,9 +16,7 @@ SELECT
 
 c.*,
 
-s.first_name,
-
-s.last_name,
+s.fullname,
 
 co.course_title
 
@@ -212,7 +210,7 @@ Student Name
 
 <td>
 
-<?= htmlspecialchars($certificate['first_name']." ".$certificate['last_name']) ?>
+<?= htmlspecialchars($certificate['fullname']) ?>
 
 </td>
 

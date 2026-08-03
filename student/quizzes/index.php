@@ -273,24 +273,6 @@ Start Quiz
 
 <?php } ?>
 
-<button class="btn btn-secondary btn-sm w-100" disabled>
-
-Attempts Exhausted
-
-</button>
-
-<?php }else{ ?>
-
-<a
-href="take.php?id=<?= $quiz['id'] ?>"
-class="btn btn-success btn-sm w-100">
-
-Start Quiz
-
-</a>
-
-<?php } ?>
-
 </td>
 
 </tr>

@@ -3,6 +3,7 @@ session_start();
 
 require_once '../config/auth.php';
 require_once '../config/database.php';
+require_once 'helpers/student_engine.php';
 
 if (!isset($_SESSION['student_login'])) {
     header("Location: ../login.php");
@@ -140,36 +141,38 @@ $totalQuizzes = $quizQuery->fetchColumn();
 
 /*
 |--------------------------------------------------------------------------
-| STUDENT PROGRESS
+| STUDENT PROGRESS (Student Engine)
 |--------------------------------------------------------------------------
 */
 
-$progressQuery = $pdo->prepare("
-SELECT COUNT(*)
-FROM lesson_progress
-WHERE student_id=?
-AND completed=1
-");
+$approvedCourse = getApprovedCourse(
+    $pdo,
+    $student_db_id
+);
 
-$progressQuery->execute([$student_db_id]);
-
-$completedLessons = $progressQuery->fetchColumn();
-
-$totalLessonQuery = $pdo->prepare("
-SELECT COUNT(*)
-FROM lessons
-");
-
-$totalLessonQuery->execute();
-
-$totalLessons = $totalLessonQuery->fetchColumn();
-
+$totalLessons = 0;
+$completedLessons = 0;
 $overallProgress = 0;
 
-if($totalLessons>0){
+if ($approvedCourse) {
 
-    $overallProgress = round(
-        ($completedLessons/$totalLessons)*100
+    $courseId = (int)$approvedCourse['course_id'];
+
+    $totalLessons = getTotalLessons(
+        $pdo,
+        $courseId
+    );
+
+    $completedLessons = getCompletedLessons(
+        $pdo,
+        $student_db_id,
+        $courseId
+    );
+
+    $overallProgress = getCourseProgress(
+        $pdo,
+        $student_db_id,
+        $courseId
     );
 
 }

@@ -12,10 +12,13 @@ $code = trim($_GET['code']);
 
 $sql = "
 SELECT
+
     c.*,
-    s.first_name,
-    s.last_name,
+
+    s.fullname,
+
     s.email,
+
     co.course_title
 
 FROM certificates c
@@ -166,7 +169,7 @@ Student Name
 
 <p>
 
-<?= htmlspecialchars($certificate['first_name']." ".$certificate['last_name']); ?>
+<?= htmlspecialchars($certificate['fullname']); ?>
 
 </p>
 

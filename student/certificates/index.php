@@ -23,7 +23,7 @@ $sql = "
 SELECT
     c.*,
     co.course_title,
-    r.registration_number
+    r.registration_id
 FROM certificates c
 
 INNER JOIN courses co

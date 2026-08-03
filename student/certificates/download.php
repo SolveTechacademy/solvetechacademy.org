@@ -7,6 +7,7 @@ require_once '../../config/database.php';
 
 require_once '../../vendor/autoload.php';
 
+
 use Dompdf\Dompdf;
 use Dompdf\Options;
 use Endroid\QrCode\Builder\Builder;
@@ -37,19 +38,17 @@ c.*,
 
 co.course_title,
 
-s.first_name,
-
-s.last_name,
+s.fullname,
 
 s.email
 
 FROM certificates c
 
 INNER JOIN students s
-ON s.id=c.student_id
+ON s.id = c.student_id
 
 INNER JOIN courses co
-ON co.id=c.course_id
+ON co.id = c.course_id
 
 WHERE
 
@@ -107,8 +106,7 @@ $options->set('isRemoteEnabled',true);
 
 $dompdf = new Dompdf($options);
 
-$studentName =
-$certificate['first_name']." ".$certificate['last_name'];
+$studentName = $certificate['fullname'];
 
 $logo="logo.png";
 
@@ -128,14 +126,15 @@ $verificationLink =
 
 $qrFile = sys_get_temp_dir() . '/certificate_qr_' . $certificate['id'] . '.png';
 
-$result = Builder::create()
-    ->writer(new PngWriter())
-    ->data($verificationLink)
-    ->size(220)
-    ->margin(10)
-    ->build();
 
-$result->saveToFile($qrFile);
+$result = new Builder(
+    writer: new PngWriter(),
+    data: $verificationLink,
+    size: 220,
+    margin: 10
+);
+
+$result->build()->saveToFile($qrFile);
 
 $html='
 

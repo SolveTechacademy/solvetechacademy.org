@@ -6,6 +6,7 @@ $pageTitle = "My Learning";
 
 require_once '../../includes/header.php';
 require_once '../../includes/sidebar.php';
+require_once '../helpers/student_engine.php';
 
 if (!isset($_SESSION['student_db_id'])) {
     header("Location: ../../login.php");
@@ -17,9 +18,7 @@ $stmt = $pdo->prepare("
 SELECT
     c.*,
     r.training_mode,
-    r.start_date,
-    scp.progress,
-    scp.completed
+    r.start_date
 FROM registrations r
 INNER JOIN courses c
     ON c.id = r.course_id
@@ -28,8 +27,6 @@ LEFT JOIN student_course_progress scp
     AND scp.student_id = r.student_id
 WHERE
     r.student_id = ?
-AND
-    r.payment_status = 'Paid'
 AND
     r.approval_status = 'Approved'
 ORDER BY c.course_title ASC
@@ -99,7 +96,8 @@ active course(s).
 
 <?php foreach($courses as $course): ?>
 
-<div class="col-12 col-md-6 col-lg-4 mb-4"></div>
+<div class="col-12 col-md-6 col-lg-4 mb-4">
+
 <div class="card h-100">
 
 <?php if(!empty($course['thumbnail'])): ?>
@@ -141,7 +139,11 @@ style="height:220px;object-fit:cover;">
 </p>
 <?php
 
-$progress = $course['progress'] ?? 0;
+$progress = getCourseProgress(
+    $pdo,
+    $student_id,
+    $course['id']
+);
 
 ?>
 

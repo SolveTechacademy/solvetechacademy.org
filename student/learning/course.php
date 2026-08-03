@@ -12,40 +12,13 @@ $courseId = (int)$_GET['id'];
 $stmt = $pdo->prepare("
 SELECT *
 FROM courses
-WHERE id=?
+WHERE id = ?
 LIMIT 1
 ");
+
 $stmt->execute([$courseId]);
 
-$modules = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
-/*
-|--------------------------------------------------------------------------
-| CHECK MODULE PROGRESS
-|--------------------------------------------------------------------------
-*/
-
-foreach ($modules as &$module) {
-
-    $progress = $pdo->prepare("
-        SELECT completed
-        FROM student_module_progress
-        WHERE student_id = ?
-        AND module_id = ?
-        LIMIT 1
-    ");
-
-    $progress->execute([
-        $_SESSION['student_db_id'],
-        $module['id']
-    ]);
-
-    $moduleProgress = $progress->fetch(PDO::FETCH_ASSOC);
-
-    $module['completed'] =
-        $moduleProgress['completed'] ?? 0;
-}
-unset($module);
+$course = $stmt->fetch(PDO::FETCH_ASSOC);
 
 if (!$course) {
     header("Location: index.php");
@@ -62,6 +35,43 @@ ORDER BY module_order ASC,id ASC
 $stmt->execute([$courseId]);
 
 $modules = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+foreach ($modules as &$module) {
+
+    $stmt = $pdo->prepare("
+        SELECT COUNT(*)
+        FROM lesson_progress lp
+        INNER JOIN lessons l
+            ON l.id = lp.lesson_id
+        WHERE lp.student_id = ?
+        AND lp.completed = 1
+        AND l.module_id = ?
+    ");
+
+    $stmt->execute([
+        $_SESSION['student_db_id'],
+        $module['id']
+    ]);
+
+    $completed = (int)$stmt->fetchColumn();
+
+    $stmt = $pdo->prepare("
+        SELECT COUNT(*)
+        FROM lessons
+        WHERE module_id = ?
+        AND status = 'Active'
+    ");
+
+    $stmt->execute([
+        $module['id']
+    ]);
+
+    $total = (int)$stmt->fetchColumn();
+
+    $module['completed'] = ($total > 0 && $completed == $total);
+}
+
+unset($module);
 
 require_once '../../includes/header.php';
 require_once '../../includes/sidebar.php';
@@ -171,7 +181,7 @@ Click to begin learning
 
 <div>
 
-<?php if($module['completed']){ ?>
+<?php if(($module['completed'] ?? false)){ ?>
 
 <span class="badge bg-success">
 

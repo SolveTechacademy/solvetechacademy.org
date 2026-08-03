@@ -62,14 +62,14 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarCollapse">
             <div class="navbar-nav ms-auto p-4 p-lg-0">
-                <a href="index.html" class="nav-item nav-link active">Home</a>
-                <a href="about.html" class="nav-item nav-link">About</a>
-                <a href="courses.html" class="nav-item nav-link">Courses</a>
+                <a href="index.php" class="nav-item nav-link active">Home</a>
+                <a href="about.php" class="nav-item nav-link">About</a>
+                <a href="courses.php" class="nav-item nav-link">Courses</a>
                 <div class="nav-item dropdown">
                     <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Pages</a>
                     <div class="dropdown-menu fade-down m-0">
-                        <a href="team.html" class="dropdown-item">Our Team</a>
-                        <a href="testimonial.html" class="dropdown-item">Testimonial</a>
+                        <a href="team.php" class="dropdown-item">Our Team</a>
+                        <a href="testimonial.php" class="dropdown-item">Testimonial</a>
 
                     </div>
                 </div>
@@ -126,9 +126,9 @@
                                 </h1>
                                 <p class=" text-white mb-4 pb-2">Engage with interactive lessons, quizzes, and
                                     projects. Experience hands-on learning that keeps you motivated and inspired.</p>
-                                <a href="about.html"
+                                <a href="about.php"
                                     class="btn btn-primary py-md-3 px-md-5 me-3 animated slideInLeft">Read More</a>
-                                <a href="signup.php" class="btn btn-light py-md-3 px-md-5 animated slideInRight">Join
+                                <a href="courses.php" class="btn btn-light py-md-3 px-md-5 animated slideInRight">Join
                                     Now</a>
                             </div>
                         </div>
@@ -234,7 +234,7 @@
                             <p class="mb-0"><i class="fa fa-arrow-right me-2"></i>Certification and Recognition</p>
                         </div>
                     </div>
-                    <a class="btn text-light py-3 px-5 mt-2" href="about.html">Read More</a>
+                    <a class="btn text-light py-3 px-5 mt-2" href="about.php">Read More</a>
                 </div>
             </div>
         </div>
@@ -881,8 +881,8 @@
                 <div class="col-lg-4 col-md-6">
                     <h4 class="text-white mb-3">Contact</h4>
                     <p class="mb-2"><i class="fa fa-map-marker-alt me-3"></i>Wilmington, DE, United States, 19802</p>
-                    <!-- <p class="mb-2"><i class="fa fa-phone-alt me-3"></i>+1 856-689-7776</p> -->
-                    <p class="mb-2"><i class="fa fa-envelope me-3"></i>info@solvetechacademy.com</p>
+                    <!-- <p class="mb-2"><i class="fa fa-phone-alt me-3"></i>+237 654 178 586</p> -->
+                    <p class="mb-2"><i class="fa fa-envelope me-3"></i>info@solvetechacademy.org</p>
                     <div class="d-flex pt-2">
                         <a class="btn btn-outline-light btn-social" href="https://www.X.com/@solvetech_a"><i class="fab fa-twitter"></i></a>
                         <a class="btn btn-outline-light btn-social" href="https://www.facebook.com/profile.php?id=100077896834045"><i class="fab fa-facebook-f"></i></a>
