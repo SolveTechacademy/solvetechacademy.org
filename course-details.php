@@ -126,8 +126,10 @@ if (!$course) {
             <div class="col-lg-5">
 
                 <img
-                    <img
-src="<?= !empty($course['thumbnail']) ? 'assets/uploads/courses/' . $course['thumbnail'] : 'img/course-default.jpg'; ?>"
+src="<?= !empty($course['thumbnail']) ? 'assets/uploads/courses/' . $course['thumbnail'] : 'assets/images/course-default.jpg'; ?>"
+class="img-fluid rounded-4 shadow w-100"
+style="height:420px;object-fit:cover;"
+alt="<?= htmlspecialchars($course['course_title']); ?>">
 class="img-fluid rounded shadow w-100"
 alt="<?= htmlspecialchars($course['course_title']); ?>">
 

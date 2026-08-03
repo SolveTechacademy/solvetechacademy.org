@@ -109,134 +109,301 @@ if(isset($_POST['login'])){
 ?>
 
 <!DOCTYPE html>
-
-<html>
+<html lang="en">
 
 <head>
 
 <meta charset="UTF-8">
 
-<title>Student Login</title>
-
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
+<title>Student Login | SolveTech Academy</title>
+
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" rel="stylesheet">
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+}
+
+body{
+background:#F6F8FC;
+font-family:Arial,Helvetica,sans-serif;
+}
+
+.input-group-text{
+    background:#fff;
+    border-right:none;
+}
+
+.form-control{
+    border-left:none;
+    height:52px;
+}
+
+.form-control:focus{
+    box-shadow:none;
+    border-color:#ced4da;
+}
+
+.input-group:focus-within{
+    box-shadow:0 0 0 .2rem rgba(255,138,61,.15);
+    border-radius:10px;
+}
+
+</style>
 
 </head>
 
-<body class="bg-light">
+<body>
+<div class="container-fluid">
 
-<div class="container">
+<div class="row min-vh-100">
 
-<div class="row justify-content-center">
+<div class="col-lg-6 d-none d-lg-flex align-items-center justify-content-center text-white"
+style="background:linear-gradient(135deg,#1E2143,#FF8A3D);">
 
-<div class="col-lg-5">
+<div class="text-center px-5">
 
-<div class="card shadow mt-5">
+<img src="assets/images/logo.png"
+style="height:90px;
+background:#fff;
+padding:12px;
+border-radius:15px;">
 
-<div class="card-header bg-primary text-white">
+<h6 class="display-4 fw-bold">
 
-<h3 class="text-center">
+Learn.<br>
 
-Student Login
+Build.<br>
 
-</h3>
+Get Certified.
+
+</h6>
+
+<p class="lead mt-4">
+
+Join SolveTech Academy and gain practical IT skills through
+industry-focused training.
+
+</p>
+
+<div class="mt-5">
+
+<div class="d-flex align-items-center mb-4">
+
+<i class="fas fa-check-circle fa-lg me-3"></i>
+
+<span>Hands-on Practical Training</span>
 
 </div>
 
-<div class="card-body">
+<div class="d-flex align-items-center mb-4">
+
+<i class="fas fa-check-circle fa-lg me-3"></i>
+
+<span>Professional Certification</span>
+
+</div>
+
+<div class="d-flex align-items-center mb-4">
+
+<i class="fas fa-check-circle fa-lg me-3"></i>
+
+<span>Career & Job Support</span>
+
+</div>
+
+<div class="d-flex align-items-center">
+
+<i class="fas fa-check-circle fa-lg me-3"></i>
+
+<span>Online & Onsite Learning</span>
+
+</div>
+
+</div>
+</div>
+
+</div>
+
+<div class="col-lg-6 d-flex align-items-center justify-content-center">
+
+<div style="width:100%;max-width:470px;padding:40px;">
+
+<div class="text-center mb-5">
+
+<img
+src="assets/images/logo.png"
+style="height:65px;">
+
+<h2 class="fw-bold mt-3 text-dark">
+
+Welcome Back 👋
+
+</h2>
+
+<p class="text-secondary mb-4">
+
+Sign in to continue your learning journey.
+
+</p>
 
 <?= $message; ?>
 
+</div>
+
 <form method="POST">
+<div class="mb-4">
 
-<div class="mb-3">
+<label class="form-label fw-semibold">
 
-<label>Email Address</label>
+Email Address
+
+</label>
+
+<div class="input-group">
+
+<span class="input-group-text">
+
+<i class="fas fa-envelope"></i>
+
+</span>
 
 <input
 type="email"
 name="email"
 class="form-control"
 value="<?= htmlspecialchars($_COOKIE['remember_email'] ?? $_POST['email'] ?? '') ?>"
-required
-autocomplete="email">
+placeholder="Enter your email"
+required>
 
 </div>
 
-<div class="mb-3">
+</div>
 
-<label>Password</label>
+<div class="mb-4">
+
+<label class="form-label fw-semibold">
+
+Password
+
+</label>
 
 <div class="input-group">
 
-    <input
-    type="password"
-    id="password"
-    name="password"
-    class="form-control"
-    required
-    autocomplete="current-password">
+<span class="input-group-text">
 
-    <button
-    type="button"
-    class="btn btn-outline-secondary"
-    onclick="togglePassword()">
+<i class="fas fa-lock"></i>
 
-        <i id="eyeIcon" class="fas fa-eye"></i>
+</span>
 
-    </button>
+<input
+type="password"
+id="password"
+name="password"
+class="form-control"
+placeholder="Enter your password"
+required>
 
-</div>
-<div class="form-check mb-3">
+<button
+type="button"
+class="btn btn-outline-secondary"
+onclick="togglePassword()">
 
-    <input
-    class="form-check-input"
-    type="checkbox"
-    name="remember"
-    id="remember">
+<i id="eyeIcon" class="fas fa-eye"></i>
 
-    <label class="form-check-label" for="remember">
-
-        Remember Me
-
-    </label>
+</button>
 
 </div>
+
+</div>
+
+<div class="d-flex justify-content-between align-items-center mb-4">
+
+<div class="form-check">
+
+<input
+class="form-check-input"
+type="checkbox"
+name="remember"
+id="remember">
+
+<label
+class="form-check-label"
+for="remember">
+
+Remember Me
+
+</label>
+
+</div>
+
+<a
+href="forgot-password.php"
+class="text-decoration-none">
+
+Forgot Password?
+
+</a>
 
 </div>
 
 <button
-class="btn btn-primary w-100"
-name="login">
+type="submit"
+name="login"
+class="btn w-100 py-3 fw-bold text-white"
+style="background:#FF8A3D;border:none;border-radius:12px;">
 
-Login
+Sign In
 
 </button>
+<div class="text-center mt-4">
 
-<div class="text-end mt-3">
-<a href="forgot-password.php">Forgot Password?</a>
-</div>
+<a
+href="forgot-password.php"
+class="text-decoration-none">
 
-</form>
-
-<br>
-
-<p class="text-center">
-
-Don't have an account?
-
-<a href="courses.php">
-
-Register Here
+Forgot your password?
 
 </a>
 
+<hr class="my-4">
+
+<p class="text-muted">
+
+Don't have an account?
+
 </p>
+
+<a
+href="courses.php"
+class="btn btn-outline-primary w-100 py-3">
+
+Create Student Account
+
+</a>
+
+<div class="text-center mt-5">
+
+<small class="text-muted">
+
+© <?= date('Y') ?> SolveTech Academy.
+
+All Rights Reserved.
+
+</small>
 
 </div>
 
+</div>
+
+</form>
 </div>
 
 </div>
@@ -248,8 +415,28 @@ Register Here
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
 <script>
-function togglePassword(){const p=document.getElementById('password');const e=document.getElementById('eyeIcon');if(p.type==='password'){p.type='text';e.classList.replace('fa-eye','fa-eye-slash');}else{p.type='password';e.classList.replace('fa-eye-slash','fa-eye');}}
+
+function togglePassword(){
+
+const p=document.getElementById('password');
+const e=document.getElementById('eyeIcon');
+
+if(p.type==="password"){
+
+p.type="text";
+e.classList.replace("fa-eye","fa-eye-slash");
+
+}else{
+
+p.type="password";
+e.classList.replace("fa-eye-slash","fa-eye");
+
+}
+
+}
+
 </script>
+
 </body>
 
 </html>

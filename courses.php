@@ -12,279 +12,426 @@ $courses = $stmt->fetchAll(PDO::FETCH_ASSOC);
 <html lang="en">
 
 <head>
-    <meta charset="utf-8">
-    <title>SolveTech : Online Courses</title>
-    <meta content="width=device-width, initial-scale=1.0" name="viewport">
-    <meta content="" name="keywords">
-    <meta content="" name="description">
 
-    <!-- Favicon -->
-    <link href="img/stasmss.ico" rel="icon"
-    <!-- Google Web Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600&family=Nunito:wght@600;700;800&display=swap"
-        rel="stylesheet">
+<meta charset="UTF-8">
 
-    <!-- Icon Font Stylesheet -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <!-- Libraries Stylesheet -->
-    <link href="lib/animate/animate.min.css" rel="stylesheet">
-    <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+<title>Courses | SolveTech Academy</title>
 
-    <!-- Customized Bootstrap Stylesheet -->
-    <link href="css/bootstrap.min.css" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 
-    <!-- Template Stylesheet -->
-    <link href="css/style.css" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" rel="stylesheet">
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Arial,Helvetica,sans-serif;
+}
+
+body{
+background:#F6F8FC;
+color:#222;
+}
+
+:root{
+
+--primary:#1E2143;
+--orange:#FF8A3D;
+
+}
+
+.navbar{
+
+background:#fff;
+box-shadow:0 3px 15px rgba(0,0,0,.06);
+
+}
+
+.navbar-brand img{
+
+height:55px;
+
+}
+
+.hero{
+
+background:linear-gradient(135deg,#1E2143,#FF8A3D);
+
+padding:90px 0;
+
+color:white;
+
+}
+
+.hero h1{
+
+font-size:55px;
+
+font-weight:700;
+
+}
+
+.hero p{
+
+font-size:20px;
+
+opacity:.95;
+
+margin-top:20px;
+
+}
+
+.section-title{
+
+font-size:38px;
+
+font-weight:700;
+
+color:var(--primary);
+
+}
+
+.course-card{
+
+background:white;
+
+border:none;
+
+border-radius:20px;
+
+overflow:hidden;
+
+transition:.35s;
+
+box-shadow:0 10px 30px rgba(0,0,0,.08);
+
+height:100%;
+
+}
+
+.course-card:hover{
+
+transform:translateY(-10px);
+
+}
+
+.course-image{
+
+height:220px;
+
+width:100%;
+
+object-fit:cover;
+
+}
+
+.badge-price{
+
+background:var(--orange);
+
+font-size:15px;
+
+padding:10px 15px;
+
+}
+
+.btn-orange{
+
+background:var(--orange);
+
+color:white;
+
+border:none;
+
+}
+
+.btn-orange:hover{
+
+background:#ef7d30;
+
+color:white;
+
+}
+
+.footer{
+
+background:var(--primary);
+
+color:white;
+
+padding:60px 0;
+
+margin-top:80px;
+
+}
+
+.footer a{
+
+color:white;
+
+text-decoration:none;
+
+}
+
+@media(max-width:992px){
+
+.hero{
+
+padding:60px 20px;
+
+text-align:center;
+
+}
+
+.hero h1{
+
+font-size:38px;
+
+}
+
+}
+
+</style>
 
 </head>
 
 <body>
-    <!-- Spinner Start -->
-    <div id="spinner"
-        class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
-        <div class="spinner-border text-primary" style="width: 3rem; height: 3rem;" role="status">
-            <span class="sr-only">Loading...</span>
-        </div>
-    </div>
-    <!-- Spinner End -->
 
+<nav class="navbar navbar-expand-lg">
 
-    <!-- Navbar Start -->
-    <nav class="navbar navbar-expand-lg bg-white navbar-light shadow sticky-top p-0">
-        <a href="index.html" class="navbar-brand d-flex align-items-center px-4 px-lg-5">
-            <p class="m-0 fw-bold" style="font-size: 25px;"><img src="img/solvetechacademy.png" alt="" height="50px"><span
-                    style="color: #fb873f;"></span></p>
-        </a>
-        <button type="button" class="navbar-toggler me-4" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"
-            style="border: none;">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarCollapse">
-            <div class="navbar-nav ms-auto p-4 p-lg-0">
-                <a href="index.html" class="nav-item nav-link active">Home</a>
-                <a href="about.html" class="nav-item nav-link">About</a>
-                <a href="courses.html" class="nav-item nav-link">Courses</a>
-                <div class="nav-item dropdown">
-                    <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Pages</a>
-                    <div class="dropdown-menu fade-down m-0">
-                        <a href="team.html" class="dropdown-item">Our Team</a>
-                        <a href="testimonial.html" class="dropdown-item">Testimonial</a>
+<div class="container">
 
-                    </div>
-                </div>
-                <a href="contact.php" class="nav-item nav-link">Contact</a>
-                <a href="login.php" class="nav-item nav-link"><i class="fa fa-user"></i></a>
-                <a href="#" class="nav-item nav-link">
-                    <div id="google_translate_element"></div>
-                </a>
-            </div>
-        </div>
-    </nav>
-    <!-- Navbar End -->
+<a class="navbar-brand" href="index.php">
 
-    <!-- Header Start -->
-    <div class="container-fluid bg-primary py-5 mb-5 page-header">
-        <div class="container py-5">
-            <div class="row justify-content-center">
-                <div class="col-lg-10 text-center">
-                    <h1 class="display-3 text-white animated slideInDown">Courses</h1>
-                    <nav aria-label="breadcrumb">
-                        <ol class="breadcrumb justify-content-center">
-                            <li class="breadcrumb-item"><a class="text-white" href="index.html">Home</a></li>
-                            <li class="breadcrumb-item text-white active" aria-current="page">Courses</li>
-                        </ol>
-                    </nav>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- Header End -->
+<img src="assets/images/logo.png">
 
+</a>
 
-    <!-- Categories Start -->
-    <div class="container-xxl py-5 category">
-        <div class="container">
-            <div class="text-center wow fadeInUp" data-wow-delay="0.1s">
-                <h6 class="section-title bg-white text-center px-3">Categories</h6>
-                <h1 class="mb-5" style="color: #fb873f;">Popular Topics to Explore</h1>
-            </div>
-            <div class="row g-2 m-2">
-                <div class="col-lg-3 col-md-6  text-center">
-                    <div class="content shadow p-3 mb-2 wow fadeInUp" data-wow-delay="0.3s">
+<button
+class="navbar-toggler"
+data-bs-toggle="collapse"
+data-bs-target="#nav">
 
-                        <img src="img/cat1.png" class="img-fluid" alt="categories"></i>
+<span class="navbar-toggler-icon"></span>
 
-                        <h5 class="my-2">
-                            <a href="#" class="text-center">Microsoft Excel</a>
-                        </h5>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6  text-center">
-                    <div class="content shadow p-3 mb-2 wow fadeInUp" data-wow-delay="0.3s">
+</button>
 
-                        <img src="img/cat2.png" class="img-fluid" alt="categories"></i>
+<div class="collapse navbar-collapse" id="nav">
 
-                        <h5 class="my-2">
-                            <a href="#" class="text-center"> AWS</a>
-                        </h5>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6  text-center">
-                    <div class="content shadow p-3 mb-2 wow fadeInUp" data-wow-delay="0.3s">
+<ul class="navbar-nav ms-auto">
 
-                        <img src="img/cat3.png" class="img-fluid" alt="categories"></i>
+<li class="nav-item">
 
-                        <h5 class="my-2">
-                            <a href="#" class="text-center">Python</a>
-                        </h5>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6  text-center">
-                    <div class="content shadow p-3 mb-2 wow fadeInUp" data-wow-delay="0.3s">
+<a class="nav-link" href="index.php">
 
-                        <img src="img/stasmss.ico" class="img-fluid" alt="categories"></i>
+Home
 
-                        <h5 class="my-2">
-                            <a href="#" class="text-center">Stasms</a>
-                        </h5>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6  text-center">
-                    <div class="content shadow p-3 mb-2 wow fadeInUp" data-wow-delay="0.3s">
+</a>
 
-                        <img src="img/cat5.png" class="img-fluid" alt="categories"></i>
+</li>
 
-                        <h5 class="my-2">
-                            <a href="#" class="text-center">Web Design</a>
-                        </h5>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6  text-center">
-                    <div class="content shadow p-3 mb-2 wow fadeInUp" data-wow-delay="0.3s">
+<li class="nav-item">
 
-                        <img src="img/cat6.png" class="img-fluid" alt="categories"></i>
+<a class="nav-link active" href="courses.php">
 
-                        <h5 class="my-2">
-                            <a href="#" class="text-center">Web Development</a>
-                        </h5>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6  text-center">
-                    <div class="content shadow p-3 mb-2 wow fadeInUp" data-wow-delay="0.3s">
+Courses
 
-                        <img src="img/cat7.png" class="img-fluid" alt="categories"></i>
+</a>
 
-                        <h5 class="my-2">
-                            <a href="#" class="text-center">MySQL</a>
-                        </h5>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6  text-center">
-                    <div class="content shadow p-3 mb-2 wow fadeInUp" data-wow-delay="0.3s">
+</li>
 
-                        <img src="img/cat8.png" class="img-fluid" alt="categories"></i>
+<li class="nav-item">
 
-                        <h5 class="my-2">
-                            <a href="#" class="text-center">UI/UX Design</a>
-                        </h5>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- Categories End -->
+<a class="nav-link" href="login.php">
 
+Student Login
 
+</a>
 
-    <!-- Courses Start -->
+</li>
 
-<div class="container-xxl py-5">
+</ul>
+
+</div>
+
+</div>
+
+</nav>
+
+<section class="hero">
+
+<div class="container">
+
+<div class="row align-items-center">
+
+<div class="col-lg-7">
+
+<h1>
+
+Upgrade Your Career With Practical Tech Skills
+
+</h1>
+
+<p>
+
+Choose from our industry-focused professional courses
+and start learning today.
+
+</p>
+
+<a
+href="#courses"
+class="btn btn-light btn-lg mt-4">
+
+Browse Courses
+
+</a>
+
+</div>
+
+<div class="col-lg-5 text-center">
+
+<i
+class="fas fa-laptop-code"
+style="font-size:180px;opacity:.9;">
+
+</i>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+<section
+class="py-5"
+id="courses">
 
 <div class="container">
 
 <div class="text-center mb-5">
 
-<h6 class="section-title bg-white text-center px-3">
-
-Popular Courses
-
-</h6>
-
-<h1 style="color:#fb873f;">
+<h2 class="section-title">
 
 Available Courses
 
-</h1>
+</h2>
+
+<p class="text-muted">
+
+Professional training designed for the modern technology industry.
+
+</p>
 
 </div>
 
 <div class="row g-4">
-
 <?php foreach($courses as $course): ?>
 
 <div class="col-lg-4 col-md-6">
 
-<div class="course-item shadow rounded overflow-hidden">
+<div class="course-card">
 
 <img
-src="<?= !empty($course['thumbnail']) ? $course['thumbnail'] : 'img/course-default.jpg'; ?>"
-class="img-fluid"
-style="height:220px;width:100%;object-fit:cover;">
+src="<?= !empty($course['thumbnail'])
+    ? 'assets/uploads/courses/' . $course['thumbnail']
+    : 'assets/images/course-default.jpg'; ?>"
+class="course-image"
+alt="<?= htmlspecialchars($course['course_title']); ?>">
 
 <div class="p-4">
 
-<h5>
+<div class="d-flex justify-content-between align-items-center mb-3">
+
+<span class="badge bg-primary">
+
+<?= htmlspecialchars($course['level']); ?>
+
+</span>
+
+<span class="badge badge-price">
+
+<?= number_format($course['course_fee']); ?> FCFA
+
+</span>
+
+</div>
+
+<h4 class="fw-bold mb-3">
 
 <?= htmlspecialchars($course['course_title']); ?>
 
-</h5>
+</h4>
 
-<p>
+<p class="text-muted">
 
-<?= substr(strip_tags($course['description']),0,100); ?>...
-
-</p>
-
-<p>
-
-<strong>Duration:</strong>
-
-<?= $course['duration']; ?>
+<?= strlen(strip_tags($course['description'])) > 120
+? substr(strip_tags($course['description']),0,120).'...'
+: strip_tags($course['description']); ?>
 
 </p>
 
-<p>
+<hr>
 
-<strong>course_fee:</strong>
+<div class="row text-center">
 
-<?= number_format($course['course_fee']); ?>
+<div class="col-6">
 
-FCFA
+<small class="text-muted">
 
-</p>
+Duration
 
-<div class="d-grid gap-2">
+</small>
 
-    <a
-    href="course-details.php?id=<?= $course['id']; ?>"
-    class="btn btn-outline-primary">
+<h6 class="fw-bold">
 
-        Learn More
+<?= htmlspecialchars($course['duration']); ?>
 
-    </a>
+</h6>
 
-    <a
-    href="register.php?course=<?= $course['id']; ?>"
-    class="btn btn-primary">
+</div>
 
-        Enroll Now
+<div class="col-6">
 
-    </a>
+<small class="text-muted">
+
+Mode
+
+</small>
+
+<h6 class="fw-bold">
+
+<?= htmlspecialchars($course['mode']); ?>
+
+</h6>
+
+</div>
+
+</div>
+
+<div class="d-grid gap-2 mt-4">
+
+<a
+href="course-details.php?id=<?= $course['id']; ?>"
+class="btn btn-outline-dark">
+
+View Details
+
+</a>
+
+<a
+href="register.php?course=<?= $course['id']; ?>"
+class="btn btn-orange">
+
+Enroll Now
+
+</a>
 
 </div>
 
@@ -300,78 +447,178 @@ FCFA
 
 </div>
 
+</section>
+<footer class="footer">
+
+<div class="container">
+
+<div class="row">
+
+<div class="col-lg-4 mb-4">
+
+<img
+src="assets/images/logo.png"
+style="height:65px;
+background:white;
+padding:10px;
+border-radius:12px;">
+
+<p class="mt-4">
+
+SolveTech Academy is committed to empowering future technology professionals through practical, industry-focused IT education.
+
+</p>
+
 </div>
 
-<!-- Courses End -->
+<div class="col-lg-4 mb-4">
 
+<h4 class="mb-4">
 
-    <!-- Footer Start -->
-    <div class="container-fluid bg-dark text-light footer pt-5 mt-5 wow fadeIn" data-wow-delay="0.1s">
-        <div class="container py-5">
-            <div class="row g-5">
-                <div class="col-lg-4 col-md-6">
-                    <h4 class="text-white mb-3">Quick Link</h4>
-                    <p><a class="text-light" href="about.html">About Us</a></p>
-                    <p><a class="text-light" href="contact.php">Contact Us</a></p>
-                    <p><a class="text-light" href="">Privacy Policy</a></p>
-                    <p><a class="text-light" href="">Terms & Condition</a></p>
-                    <p><a class="text-light" href="">FAQs & Help</a></p>
-                </div>
-                <div class="col-lg-4 col-md-6">
-                    <h4 class="text-white mb-3">Contact</h4>
-                    <p class="mb-2"><i class="fa fa-map-marker-alt me-3"></i>Wilmington, DE, United States, 19802</p>
-                    <!-- <p class="mb-2"><i class="fa fa-phone-alt me-3"></i>+1 856-689-7776</p> -->
-                    <p class="mb-2"><i class="fa fa-envelope me-3"></i>info@solvetechacademy.org</p>
-                    <div class="d-flex pt-2">
-                        <a class="btn btn-outline-light btn-social" href="https://www.X.com/@solvetech_a"><i class="fab fa-twitter"></i></a>
-                        <a class="btn btn-outline-light btn-social" href="https://www.facebook.com/profile.php?id=100077896834045"><i class="fab fa-facebook-f"></i></a>
-                        <a class="btn btn-outline-light btn-social" href="https://www.youtube.com/@solvetechacademy1555"><i class="fab fa-youtube"></i></a>
-                        <a class="btn btn-outline-light btn-social" href="https://www.linkedin.com/in/nkam-valery-8a835625a/"><i class="fab fa-linkedin-in"></i></a>
-                    </div>
-                </div>
+Quick Links
 
-                <div class="col-lg-4 col-md-6">
-                    <h4 class="text-white mb-3">Subscribe to our Newsletter</h4>
-                    <p>Subscribe now and join our growing community of learners committed to lifelong education! </p>
-                    <div class="position-relative mx-auto" style="max-width: 400px;">
-                        <form action="#">
-                            <input class="form-control border-0 w-100 py-3 ps-4 pe-5" type="email"
-                                placeholder="Your email" required>
-                            <button type="submit"
-                                class="btn btn-primary py-2 position-absolute top-0 end-0 mt-2 me-2">Subscribe</button>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="container">
-            <div class="copyright">
-                <div class="row">
-                    <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
-                        &copy; <a class="border-bottom" href="index.html">SolveTech</a>, All Right Reserved.
+</h4>
 
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- Footer End -->
+<ul class="list-unstyled">
 
+<li class="mb-2">
 
-    <!-- Back to Top -->
-    <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>
+<a href="index.php">
 
+Home
 
-    <!-- JavaScript Libraries -->
-    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="lib/wow/wow.min.js"></script>
-    <script src="lib/easing/easing.min.js"></script>
-    <script src="lib/waypoints/waypoints.min.js"></script>
-    <script src="lib/owlcarousel/owl.carousel.min.js"></script>
+</a>
 
-    <!-- Template Javascript -->
-    <script src="js/main.js"></script>
+</li>
+
+<li class="mb-2">
+
+<a href="courses.php">
+
+Courses
+
+</a>
+
+</li>
+
+<li class="mb-2">
+
+<a href="login.php">
+
+Student Login
+
+</a>
+
+</li>
+
+<li class="mb-2">
+
+<a href="contact.php">
+
+Contact
+
+</a>
+
+</li>
+
+</ul>
+
+</div>
+
+<div class="col-lg-4">
+
+<h4 class="mb-4">
+
+Contact
+
+</h4>
+
+<p>
+
+<i class="fas fa-envelope me-2"></i>
+
+info@solvetechacademy.org
+
+</p>
+
+<p>
+
+<i class="fas fa-phone me-2"></i>
+
++237 XXX XXX XXX
+
+</p>
+
+<p>
+
+<i class="fas fa-location-dot me-2"></i>
+
+Buea, Cameroon
+
+</p>
+
+<div class="mt-4">
+
+<a
+href="#"
+class="text-white me-3">
+
+<i class="fab fa-facebook fa-lg"></i>
+
+</a>
+
+<a
+href="#"
+class="text-white me-3">
+
+<i class="fab fa-linkedin fa-lg"></i>
+
+</a>
+
+<a
+href="#"
+class="text-white me-3">
+
+<i class="fab fa-youtube fa-lg"></i>
+
+</a>
+
+<a
+href="#"
+class="text-white">
+
+<i class="fab fa-whatsapp fa-lg"></i>
+
+</a>
+
+</div>
+
+</div>
+
+</div>
+
+<hr class="border-light mt-5">
+
+<div class="text-center">
+
+© <?= date('Y'); ?>
+
+<strong>
+
+SolveTech Academy
+
+</strong>
+
+All Rights Reserved.
+
+</div>
+
+</div>
+
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
 </body>
 
 </html>

@@ -51,11 +51,16 @@ die("Certificate already exists.");
 
 }
 
-$certificateNumber =
-"STA-".
-date("Y").
-"-".
-str_pad(rand(1,999999),6,"0",STR_PAD_LEFT);
+$year = date("Y");
+
+$stmt = $pdo->query("
+SELECT COUNT(*) + 1
+FROM certificates
+");
+
+$next = str_pad($stmt->fetchColumn(), 6, "0", STR_PAD_LEFT);
+
+$certificateNumber = "STA-CERT-$year-$next";
 
 $insert = $pdo->prepare("
 INSERT INTO certificates(
@@ -85,34 +90,7 @@ CURDATE(),
 )
 
 ");
-$insert = $pdo->prepare("
-INSERT INTO certificates(
 
-student_id,
-registration_id,
-course_id,
-certificate_number,
-issue_date,
-completion_date,
-grade,
-status
-
-)
-
-VALUES(
-
-?,
-?,
-?,
-?,
-CURDATE(),
-CURDATE(),
-'PASS',
-'Issued'
-
-)
-
-");
 $insert->execute([
 
     $registration['student_id'],

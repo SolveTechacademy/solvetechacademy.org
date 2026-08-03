@@ -59,5 +59,18 @@ if($stmt->rowCount()){
 
 }
 
-header("Location: lesson.php?id=".$lessonId);
+/*
+|--------------------------------------------------------------------------
+| Redirect
+|--------------------------------------------------------------------------
+*/
+
+if (isset($_GET['next']) && is_numeric($_GET['next'])) {
+
+    header("Location: lesson.php?id=" . (int)$_GET['next']);
+    exit;
+
+}
+
+header("Location: lesson.php?id=" . $lessonId);
 exit;

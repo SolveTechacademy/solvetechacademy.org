@@ -42,21 +42,57 @@ $courses = $stmt->fetchAll(PDO::FETCH_ASSOC);
 ?>
 <div class="container-fluid">
 
-    <div class="row mb-4">
+   <div class="card mb-4">
 
-        <div class="col-12">
+<div class="card-body">
 
-            <h2 class="fw-bold">
-                My Learning
-            </h2>
+<?php
 
-            <p class="text-muted">
-                Continue learning where you left off.
-            </p>
+$hour = date("H");
 
-        </div>
+if($hour < 12){
 
-    </div>
+$greeting = "☀ Good Morning";
+
+}elseif($hour < 17){
+
+$greeting = "🌤 Good Afternoon";
+
+}else{
+
+$greeting = "🌙 Good Evening";
+
+}
+
+?>
+
+<h2 class="fw-bold">
+
+<?= $greeting; ?>,
+
+<?= htmlspecialchars($_SESSION['student_name'] ?? 'Student'); ?>
+
+</h2>
+
+<p class="text-muted mb-0">
+
+Continue your learning journey.
+
+You have
+
+<strong>
+
+<?= count($courses); ?>
+
+</strong>
+
+active course(s).
+
+</p>
+
+</div>
+
+</div>
 
     <div class="row">
     <?php if(count($courses) > 0): ?>
@@ -64,7 +100,7 @@ $courses = $stmt->fetchAll(PDO::FETCH_ASSOC);
 <?php foreach($courses as $course): ?>
 
 <div class="col-12 col-md-6 col-lg-4 mb-4"></div>
-<div class="card h-100 shadow-sm border-0">
+<div class="card h-100">
 
 <?php if(!empty($course['thumbnail'])): ?>
 
@@ -75,7 +111,13 @@ style="height:220px;object-fit:cover;">
 
 <?php endif; ?>
 
-<div class="card-body d-flex flex-column"></div>
+<div class="card-body d-flex flex-column">
+
+<span class="badge bg-primary mb-2">
+
+<?= htmlspecialchars($course['level']); ?>
+
+</span>
 <h5 class="fw-bold">
 
 <?= htmlspecialchars($course['course_title']); ?>
@@ -85,6 +127,13 @@ style="height:220px;object-fit:cover;">
 <p class="text-muted small">
 
 <?= htmlspecialchars($course['duration']); ?>
+<br>
+
+<span class="badge bg-success mt-2">
+
+<?= htmlspecialchars($course['training_mode']); ?>
+
+</span>
 
 •
 <?= htmlspecialchars($course['level']); ?>
@@ -106,9 +155,13 @@ style="width:<?= $progress; ?>%;">
 
 </div>
 
-<p class="small">
+<div class="d-flex justify-content-between">
 
-Progress:
+<span>
+
+Progress
+
+</span>
 
 <strong>
 
@@ -116,10 +169,10 @@ Progress:
 
 </strong>
 
-</p>
+</div>
 <a
 href="course.php?id=<?= $course['id']; ?>"
-class="btn btn-primary mt-auto w-100">
+class="btn btn-primary mt-auto w-100 rounded-pill">
 
 Continue Learning
 

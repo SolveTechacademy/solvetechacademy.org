@@ -107,20 +107,64 @@ require_once '../../includes/sidebar.php';
 
 <div class="container-fluid">
 
-<div class="card shadow">
-
-<div class="card-header">
-
-    <h3><?= htmlspecialchars($lesson['lesson_title']) ?></h3>
-
-</div>
+<div class="card mb-4">
 
 <div class="card-body">
 
-    <div class="progress mb-4">
+<div class="row align-items-center">
+
+<div class="col-lg-9">
+
+<span class="badge bg-primary mb-3">
+
+Lesson
+
+</span>
+
+<h2 class="fw-bold text-primary">
+
+<?= htmlspecialchars($lesson['lesson_title']) ?>
+
+</h2>
+
+<p class="text-muted mb-0">
+
+Complete this lesson to unlock the next lesson and increase your overall course progress.
+
+</p>
+
+</div>
+
+<div class="col-lg-3 text-center">
+
+<i class="fas fa-play-circle"
+style="font-size:90px;color:#FF8A3D;"></i>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<div class="card">
+
+<div class="card-body"></div>
+
+<div class="card-body">
+
+   <h5 class="fw-bold text-primary">
+
+Course Progress
+
+</h5>
+
+<div class="progress mb-4"
+style="height:18px;border-radius:20px;">
 
         <div
-            class="progress-bar bg-success"
+            class="progress-bar bg-warning"
             role="progressbar"
             style="width: <?= $percentage ?>%;"
             aria-valuenow="<?= $percentage ?>"
@@ -135,7 +179,7 @@ require_once '../../includes/sidebar.php';
 
 <?php if(!empty($lesson['video_url'])): ?>
 
-<div class="ratio ratio-16x9 mb-4">
+<div class="ratio ratio-16x9 mb-4 shadow rounded overflow-hidden">
 
 <iframe
 src="<?= htmlspecialchars($lesson['video_url']) ?>"
@@ -159,7 +203,7 @@ allowfullscreen>
 
 <?php if(!empty($lesson['notes'])): ?>
 
-<div class="alert alert-info">
+<div class="alert alert-warning shadow-sm">
 
 <?= nl2br(htmlspecialchars($lesson['notes'])) ?>
 
@@ -171,7 +215,7 @@ allowfullscreen>
 
 <a
 href="../../uploads/lessons/<?= urlencode($lesson['file_path']) ?>"
-class="btn btn-success"
+class="btn btn-outline-success rounded-pill"
 target="_blank">
 
 Download Lesson Material
@@ -189,7 +233,7 @@ Download Lesson Material
 <?php if($previousLesson): ?>
 
 <a
-class="btn btn-secondary"
+class="btn btn-outline-secondary rounded-pill"
 href="lesson.php?id=<?= $previousLesson['id'] ?>">
 
 Previous Lesson
@@ -205,10 +249,10 @@ Previous Lesson
 <?php if($nextLesson): ?>
 
 <a
-class="btn btn-primary"
-href="lesson.php?id=<?= $nextLesson['id'] ?>">
+class="btn btn-primary"class="btn btn-primary rounded-pill"
+href="progress.php?lesson=<?= $lessonId ?>&next=<?= $nextLesson['id']; ?>">
 
-Next Lesson
+Next Lesson →
 
 </a>
 
@@ -225,14 +269,18 @@ Next Lesson
 </div>
 <hr>
 
+<div class="text-center mt-4">
+
 <a
 href="progress.php?lesson=<?= $lessonId ?>"
-class="btn btn-success">
+class="btn btn-success rounded-pill px-5 py-3">
 
-<i class="fas fa-check-circle"></i>
+<i class="fas fa-check-circle me-2"></i>
 
 Mark Lesson Complete
 
 </a>
+
+</div>
 
 <?php require_once '../../includes/footer.php'; ?>
